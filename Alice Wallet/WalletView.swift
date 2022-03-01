@@ -34,9 +34,21 @@ struct WalletView: View {
 
     fileprivate func walletSettings() -> some View {
         return Group {
-            TextField("Wallet Name", text:$model.walletName).textFieldStyle(.roundedBorder)
-            TextField("Wallet Key", text:$model.walletKey).textFieldStyle(.roundedBorder)
-            TextField("Wallet Key Derivation Function", text:$model.walletKeyDerivationFunction).textFieldStyle(.roundedBorder)
+            HStack {
+                Text("Wallet Name")
+                Spacer()
+                TextField("", text:$model.walletName).textFieldStyle(.roundedBorder)
+            }
+            HStack {
+                Text("Wallet Key")
+                Spacer()
+                TextField("", text:$model.walletKey).textFieldStyle(.roundedBorder)
+            }
+            HStack {
+                Text("Key Derivation")
+                Spacer()
+                TextField("", text:$model.walletKeyDerivationFunction).textFieldStyle(.roundedBorder)
+            }
         }
     }
 }
