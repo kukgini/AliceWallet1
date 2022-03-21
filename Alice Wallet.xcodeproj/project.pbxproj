@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		91023B712743592A0083A5AB /* genesis.json in Resources */ = {isa = PBXBuildFile; fileRef = 91023B702743592A0083A5AB /* genesis.json */; };
 		916219B92744C5350036888C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916219B82744C5350036888C /* ViewModel.swift */; };
 		9165FFE32751CC38009C1B82 /* LedgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9165FFE22751CC38009C1B82 /* LedgerView.swift */; };
 		919230402741F3B800A4D31D /* VcxAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9192303F2741F3B800A4D31D /* VcxAdaptor.swift */; };
@@ -18,6 +17,7 @@
 		91DB9C66274B299C003632E6 /* ConnectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB9C65274B299C003632E6 /* ConnectionsView.swift */; };
 		91DB9C68274B2FF4003632E6 /* AgencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB9C67274B2FF4003632E6 /* AgencyView.swift */; };
 		91DB9C6A274BB11F003632E6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB9C69274BB11F003632E6 /* ContentView.swift */; };
+		91E1A09627E8A4300010562C /* genesis.json in Resources */ = {isa = PBXBuildFile; fileRef = 91023B702743592A0083A5AB /* genesis.json */; };
 		91F70EB427560E760004CC90 /* CredentialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F70EB327560E760004CC90 /* CredentialView.swift */; };
 		A3723DDE47343A1FEFB71884 /* Pods_Alice_Wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A867E94489D67132E7F18F /* Pods_Alice_Wallet.framework */; };
 /* End PBXBuildFile section */
@@ -175,9 +175,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91E1A09627E8A4300010562C /* genesis.json in Resources */,
 				91CF507C273F773800DFFCD7 /* Preview Assets.xcassets in Resources */,
 				91CF5079273F773800DFFCD7 /* Assets.xcassets in Resources */,
-				91023B712743592A0083A5AB /* genesis.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

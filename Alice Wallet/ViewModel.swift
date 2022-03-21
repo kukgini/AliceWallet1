@@ -57,7 +57,7 @@ class ViewModel : ObservableObject {
     @Published var walletKeyDerivationFunction = "ARGON2I_MOD"
     @Published var ledgerGenesisURL = "http://test.bcovrin.vonx.io/genesis"
     @Published var genesisTransaction = ""
-    @Published var agencyEndpoint = "https://42b4-34-64-149-83.ngrok.io" // URL of the agency
+    @Published var agencyEndpoint = "https://5faa-165-243-5-20.ngrok.io" // URL of the agency
     @Published var agencyDid = "XZMYyaTUhuteR4DPDX1df1" // DID of the agency
     @Published var agencyVerkey = "Hezce2UWMZ3wUhVkh2LfKSs8nDzWwzs2Win7EzNN3YaR"
     
@@ -125,20 +125,17 @@ class ViewModel : ObservableObject {
     
     func openMainPool() {
         // http://test.bcovrin.vonx.io/genesis
-        let fullURL = Bundle.main.url(forResource: "genesis", withExtension: "json")
-        do {
-            let jsonString = try String(contentsOf: fullURL!, encoding: .utf8)
-            self.genesisTransaction = jsonString
-            let json = JSON(jsonString)
-        }
-        catch {/* error handling here */}
+        let url = Bundle.main.url(forResource: "genesis", withExtension: "json")
+        let jsonString = try! String(contentsOf: url!, encoding: .utf8)
+        self.genesisTransaction = jsonString
+        print("genesis path=", url!.path)
 
         let config = """
-            {
-                "genesis_path": "\(fullURL!)"
-            }
+        {
+            "genesis_path": "\(url!.path)"
+        }
         """
-        print("open main pool. config=", config)
+        print("open main pool. config=\n", config)
         VcxAdaptor.shared.vcxOpenMainPool(config:config, completion:{ error in
             if error != nil && error!._code > 0 {
                 print("open main pool failed. error=", error!.localizedDescription)
