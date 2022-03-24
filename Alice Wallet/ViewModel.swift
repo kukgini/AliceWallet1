@@ -57,13 +57,13 @@ class ViewModel : ObservableObject {
     @Published var walletKeyDerivationFunction = "ARGON2I_MOD"
     @Published var ledgerGenesisURL = "http://test.bcovrin.vonx.io/genesis"
     @Published var genesisTransaction = ""
-    @Published var agencyEndpoint = "https://5faa-165-243-5-20.ngrok.io" // URL of the agency
-    @Published var agencyDid = "XZMYyaTUhuteR4DPDX1df1" // DID of the agency
-    @Published var agencyVerkey = "Hezce2UWMZ3wUhVkh2LfKSs8nDzWwzs2Win7EzNN3YaR"
     
-    //    @Published var agencyEndpoint = "https://f0f5-34-64-103-214.ngrok.io"
-    //    @Published var agencyDid = "VsKV7grR1BUE29mG2Fm2kX"
-    //    @Published var agencyVerkey = "Hezce2UWMZ3wUhVkh2LfKSs8nDzWwzs2Win7EzNN3YaR"
+    @Published var agencyEndpoint = "https://d749-165-243-5-20.ngrok.io"
+    @Published var agencyDid = "VsKV7grR1BUE29mG2Fm2kX"
+    @Published var agencyVerkey = "Hezce2UWMZ3wUhVkh2LfKSs8nDzWwzs2Win7EzNN3YaR"
+//    @Published var agencyEndpoint = "https://ariesvcx.agency.staging.absa.id/agency"
+//    @Published var agencyDid = "VsKV7grR1BUE29mG2Fm2kX"
+//    @Published var agencyVerkey = "Hezce2UWMZ3wUhVkh2LfKSs8nDzWwzs2Win7EzNN3YaR"
 
     @Published var remoteToSdkDid = "" // pairwise DID of this client's agent in the agency. aka, remote_to_sdk_did
     @Published var remoteToSdkVerkey = "" // verkey of this client's agent in the agency. aka, remote_to_sdk_verkey
@@ -89,11 +89,11 @@ class ViewModel : ObservableObject {
         
     func createWallet() {
         let config = """
-            {
-                "wallet_name": "\(walletName)",
-                "wallet_key": "\(walletKey)",
-                "wallet_key_derivation": "\(walletKeyDerivationFunction)"
-            }
+        {
+            "wallet_name": "\(walletName)",
+            "wallet_key": "\(walletKey)",
+            "wallet_key_derivation": "\(walletKeyDerivationFunction)"
+        }
         """
         print("create wallet. config=", config)
         VcxAdaptor.shared.createWallet(config:config, completion:{ error in
@@ -107,11 +107,11 @@ class ViewModel : ObservableObject {
     
     func openMainWallet() {
         let config = """
-            {
-                "wallet_name": "\(walletName)",
-                "wallet_key": "\(walletKey)",
-                "wallet_key_derivation": "ARGON2I_MOD"
-            }
+        {
+            "wallet_name": "\(walletName)",
+            "wallet_key": "\(walletKey)",
+            "wallet_key_derivation": "ARGON2I_MOD"
+        }
         """
         print("open main wallet. config=", config)
         VcxAdaptor.shared.openMainWallet(config:config, completion:{ error, handle in
@@ -147,11 +147,11 @@ class ViewModel : ObservableObject {
 
     func provisionCloudAgent() {
         let config = """
-            {
-              "agency_endpoint": "\(agencyEndpoint)",
-              "agency_did": "\(agencyDid)",
-              "agency_verkey": "\(agencyVerkey)"
-            }
+        {
+            "agency_endpoint": "\(agencyEndpoint)",
+            "agency_did": "\(agencyDid)",
+            "agency_verkey": "\(agencyVerkey)"
+        }
         """
         print("provision cloud agent. config=", config)
         VcxAdaptor.shared.vcxProvisionCloudAgent(config: config, completion: { error, result in
