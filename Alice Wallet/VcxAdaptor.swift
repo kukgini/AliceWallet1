@@ -89,4 +89,12 @@ class VcxAdaptor {
     func credentialGetOffers(withHandle:NSNumber!, completion:((Error?,String?) -> Void)?) {
         self.vcx!.credentialGetOffers(withHandle, completion:completion)
     }
+    
+    func credentialCreateWithOffer(sourceId:String, offer:String, completion:((Error?,NSNumber?) -> Void)?) {
+        self.vcx!.credentialCreate(withOffer:sourceId, offer:offer, completion:completion)
+    }
+    
+    func credentialSendRequest(credentialHandle:NSNumber!, connectionHandle:NSNumber!, completion:((Error?) -> Void)?) {
+        self.vcx!.credentialSendRequest(credentialHandle, connectionHandle:connectionHandle, paymentHandle:0, completion:completion);
+    }
 }
