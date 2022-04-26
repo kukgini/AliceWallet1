@@ -26,6 +26,11 @@ struct ContentView: View {
                     Image(systemName: "list.dash")
                     Text("Connections")
                 }
+            CredentialView(model:model)
+                .tabItem {
+                    Image(systemName: "list.dash")
+                    Text("Credentials")
+                }
         }
     }
 }

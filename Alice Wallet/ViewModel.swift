@@ -72,12 +72,7 @@ class ViewModel : ObservableObject {
             handle:NSNumber,
             status:ConnectionStatus,
             inviteDetails:JSON,
-            selected:Bool)] =
-        ["0000-0000-0000-0000-0000":(
-            handle:NSNumber(value:0),
-            status:ConnectionStatus.initialized,
-            inviteDetails:JSON.null,
-            selected:false)]
+            selected:Bool)] = [:]
     @Published var message = ""
     @Published var credentials: [String:String] = [:]
     
