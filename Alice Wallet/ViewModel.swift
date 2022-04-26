@@ -58,12 +58,10 @@ class ViewModel : ObservableObject {
     @Published var ledgerGenesisURL = "http://test.bcovrin.vonx.io/genesis"
     @Published var genesisTransaction = ""
     
-    @Published var agencyEndpoint = "https://d749-165-243-5-20.ngrok.io"
+    @Published var agencyEndpoint = "https://devariesvcx.duckdns.org"
+//    @Published var agencyEndpoint = "https://ariesvcx.agency.staging.absa.id"
     @Published var agencyDid = "VsKV7grR1BUE29mG2Fm2kX"
     @Published var agencyVerkey = "Hezce2UWMZ3wUhVkh2LfKSs8nDzWwzs2Win7EzNN3YaR"
-//    @Published var agencyEndpoint = "https://ariesvcx.agency.staging.absa.id/agency"
-//    @Published var agencyDid = "VsKV7grR1BUE29mG2Fm2kX"
-//    @Published var agencyVerkey = "Hezce2UWMZ3wUhVkh2LfKSs8nDzWwzs2Win7EzNN3YaR"
 
     @Published var remoteToSdkDid = "" // pairwise DID of this client's agent in the agency. aka, remote_to_sdk_did
     @Published var remoteToSdkVerkey = "" // verkey of this client's agent in the agency. aka, remote_to_sdk_verkey
@@ -204,7 +202,7 @@ class ViewModel : ObservableObject {
     
     func connectionNextStep(id:String) {
         let c = self.connections[id]!
-        print("connection id=\(id) status=\(c.status.rawValue.description)")
+        print("connection handle=\(c.handle) id=\(id) status=\(c.status.rawValue.description)")
         switch c.status {
         case .initialized:
             print("connection next step is connect.")
@@ -241,7 +239,7 @@ class ViewModel : ObservableObject {
     
     func connectionConnect(id:String) {
         let c = connections[id]!
-        let connectionType = "{\"use_public_did\":true}"
+        let connectionType = "{\"use_public_did\":false}"
         print("connection connect. id=\(id), handle=\(c.handle), connectionType=\(connectionType)")
         VcxAdaptor.shared.connectionConnect(
             withHandle:c.handle,
