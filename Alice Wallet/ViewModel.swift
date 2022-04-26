@@ -311,9 +311,9 @@ class ViewModel : ObservableObject {
                 withHandle:c.handle,
                 completion:{error, offers in
                     if error != nil && error!._code > 0 {
-                        print("get credential offer failed. error=", error!.localizedDescription)
+                        print("get credential offers for connection id=\(id) failed. error=", error!.localizedDescription)
                     } else {
-                        print("connection id=\(id) offers=\(offers!)")
+                        print("get credential offers for connection id=\(id) successed.")
                         let offer = offers?.dropFirst().dropLast()
                         VcxAdaptor.shared.credentialCreateWithOffer(
                             sourceId:id,
@@ -323,6 +323,16 @@ class ViewModel : ObservableObject {
                                     print("create credential with offer failed. error=", error!.localizedDescription)
                                 } else {
                                     print("create credential with offer successed. credentialHandle=", credentialHandle!)
+                                    VcxAdaptor.shared.credentialSendRequest(
+                                        credentialHandle: credentialHandle!,
+                                        connectionHandle: c.handle,
+                                        completion: { error in
+                                            if error != nil && error!._code > 0 {
+                                                print("credential request failed. error=", error!.localizedDescription)
+                                            } else {
+                                                print("credential request successed.")
+                                            }
+                                    })
                                 }
                             })
                     }
