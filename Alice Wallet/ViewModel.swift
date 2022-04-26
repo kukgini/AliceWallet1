@@ -313,7 +313,18 @@ class ViewModel : ObservableObject {
                     if error != nil && error!._code > 0 {
                         print("get credential offer failed. error=", error!.localizedDescription)
                     } else {
-                        print("get credential offer successed. offers=", offers!)
+                        print("connection id=\(id) offers=\(offers!)")
+                        let offer = offers?.dropFirst().dropLast()
+                        VcxAdaptor.shared.credentialCreateWithOffer(
+                            sourceId:id,
+                            offer:String(offer!),
+                            completion: {error, credentialHandle in
+                                if error != nil && error!._code > 0 {
+                                    print("create credential with offer failed. error=", error!.localizedDescription)
+                                } else {
+                                    print("create credential with offer successed. credentialHandle=", credentialHandle!)
+                                }
+                            })
                     }
                 })
         }
@@ -358,7 +369,9 @@ class ViewModel : ObservableObject {
                 if error != nil && error!._code > 0 {
                     print("credential get offers failed. error=", error!.localizedDescription)
                 } else {
-                    print("credential get offers successed. offers=", offers!)
+                    for offer in offers! {
+                        print("connection=\(id) offer=\(offer)")
+                    }
                 }
         })
     }
