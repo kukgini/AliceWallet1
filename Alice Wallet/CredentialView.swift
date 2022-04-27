@@ -29,7 +29,7 @@ struct CredentialView: View {
         }
     }
 
-    fileprivate func credentialItemView(id:String) -> some View {
+    fileprivate func credentialItemView(id:NSNumber) -> some View {
         return HStack {
 
         }

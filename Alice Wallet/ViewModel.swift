@@ -50,6 +50,53 @@ public enum ConnectionStatus: NSNumber {
     }
 }
 
+public enum CredentialStatus: NSNumber {
+    case initialized = 1
+    case request_sent = 2
+    case offer_received = 3
+    case accepted = 4
+    
+    func description() -> String {
+        switch self {
+        case .initialized:
+            return "Initialzied"
+        case .request_sent:
+            return "Request Sent"
+        case .offer_received:
+            return "Offer Received"
+        case .accepted:
+            return "Accepted"
+        }
+    }
+    
+    func color() -> Color {
+        switch self {
+        case .initialized:
+            return Color.white
+        case .request_sent:
+            return Color.yellow
+        case .offer_received:
+            return Color.blue
+        case .accepted:
+            return Color.green
+        }
+    }
+    
+    func icon() -> String {
+        switch self {
+        case .initialized:
+            return "icloud"
+        case .request_sent:
+            return "icloud"
+        case .offer_received:
+            return "icloud"
+        case .accepted:
+            return "link.icloud.fill"
+        }
+    }
+}
+
+
 class ViewModel : ObservableObject {
 
     @Published var walletName = "alice"
@@ -69,12 +116,12 @@ class ViewModel : ObservableObject {
     @Published var sdkToRemoteVerkey = "" // verkey of this client used to commnicate with it's agent in the agency. aka, sdk_to_remote_verkey
     @Published var inviteDetails = ""
     @Published var connections: [String:(
-            handle:NSNumber,
-            status:ConnectionStatus,
-            inviteDetails:JSON,
-            selected:Bool)] = [:]
+        handle:NSNumber,
+        status:ConnectionStatus,
+        inviteDetails:JSON,
+        selected:Bool)] = [:]
     @Published var message = ""
-    @Published var credentials: [String:String] = [:]
+    @Published var credentials: [NSNumber:NSNumber] = [:]
     
     init() {
         
@@ -318,11 +365,12 @@ class ViewModel : ObservableObject {
                         VcxAdaptor.shared.credentialCreateWithOffer(
                             sourceId:id,
                             offer:String(offer!),
-                            completion: {error, credentialHandle in
+                            completion: { error, credentialHandle in
                                 if error != nil && error!._code > 0 {
                                     print("create credential with offer failed. error=", error!.localizedDescription)
                                 } else {
                                     print("create credential with offer successed. credentialHandle=", credentialHandle!)
+                                    self.credentials[credentialHandle!] = c.handle
                                     VcxAdaptor.shared.credentialSendRequest(
                                         credentialHandle: credentialHandle!,
                                         connectionHandle: c.handle,
@@ -334,9 +382,21 @@ class ViewModel : ObservableObject {
                                             }
                                     })
                                 }
-                            })
+                        })
                     }
                 })
+            for (credentialHandle, connectionHandle) in credentials {
+                VcxAdaptor.shared.credentialUpdateStateV2(
+                    credentialHandle: credentialHandle,
+                    connectionHandle: connectionHandle,
+                    completion: { error, status in
+                        if error != nil && error!._code > 0 {
+                            print("credential update state failed. error=", error!.localizedDescription)
+                        } else {
+                            print("credential update state successed. credentialHandle=\(credentialHandle) connectionHandle=\(connectionHandle) statue=\(status!)")
+                        }
+                })
+            }
         }
     }
     

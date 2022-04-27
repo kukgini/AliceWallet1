@@ -97,4 +97,9 @@ class VcxAdaptor {
     func credentialSendRequest(credentialHandle:NSNumber!, connectionHandle:NSNumber!, completion:((Error?) -> Void)?) {
         self.vcx!.credentialSendRequest(credentialHandle, connectionHandle:connectionHandle, paymentHandle:0, completion:completion);
     }
+    
+    func credentialUpdateStateV2(credentialHandle:NSNumber!, connectionHandle:NSNumber!, completion:((Error?,NSNumber?) -> Void)?) {
+        self.vcx!.credentialUpdateStateV2(credentialHandle, connectionHandle:connectionHandle, completion:completion)
+    }
+    
 }
