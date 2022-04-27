@@ -337,23 +337,8 @@ class ViewModel : ObservableObject {
     }
     
     func credentialsStatusUpdate() {
+        self.connectionStatusUpdate()
         for (id, c) in connections {
-            print("connection status update. id=\(id), handle=\(c.handle), statue=\(c.status)")
-            VcxAdaptor.shared.connectionUpdateState(
-                withHandle:c.handle,
-                completion: {error, status in
-                    if error != nil && error!._code > 0 {
-                        print("connection status update failed. error=", error!.localizedDescription)
-                    } else {
-                        print("connection status update successed. status=", status!)
-                        self.connections[id] = (
-                            handle:c.handle,
-                            status:ConnectionStatus(rawValue:status!)!,
-                            inviteDetails: c.inviteDetails,
-                            selected: false
-                        )
-                    }
-            })
             VcxAdaptor.shared.credentialGetOffers(
                 withHandle:c.handle,
                 completion:{error, offers in
@@ -380,23 +365,27 @@ class ViewModel : ObservableObject {
                                             } else {
                                                 print("credential request successed.")
                                             }
-                                    })
+                                        }
+                                    )
                                 }
-                        })
+                            }
+                        )
                     }
-                })
-            for (credentialHandle, connectionHandle) in credentials {
-                VcxAdaptor.shared.credentialUpdateStateV2(
-                    credentialHandle: credentialHandle,
-                    connectionHandle: connectionHandle,
-                    completion: { error, status in
-                        if error != nil && error!._code > 0 {
-                            print("credential update state failed. error=", error!.localizedDescription)
-                        } else {
-                            print("credential update state successed. credentialHandle=\(credentialHandle) connectionHandle=\(connectionHandle) statue=\(status!)")
-                        }
-                })
-            }
+                }
+            )
+        }
+        for (credentialHandle, connectionHandle) in credentials {
+            VcxAdaptor.shared.credentialUpdateStateV2(
+                credentialHandle: credentialHandle,
+                connectionHandle: connectionHandle,
+                completion: { error, status in
+                    if error != nil && error!._code > 0 {
+                        print("credential update state failed. error=", error!.localizedDescription)
+                    } else {
+                        print("credential update state successed. credentialHandle=\(credentialHandle) connectionHandle=\(connectionHandle) statue=\(status!)")
+                    }
+                }
+            )
         }
     }
     
