@@ -102,4 +102,7 @@ class VcxAdaptor {
         self.vcx!.credentialUpdateStateV2(credentialHandle, connectionHandle:connectionHandle, completion:completion)
     }
     
+    func getCredential(credentialHandle:NSNumber!, completion:((Error?,String?) -> Void)?) {
+        self.vcx!.getCredential(credentialHandle, completion:completion)
+    }
 }

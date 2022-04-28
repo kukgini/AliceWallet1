@@ -312,7 +312,8 @@ class ViewModel : ObservableObject {
                         selected: c.selected
                     )
                 }
-        })
+            }
+        )
     }
     
     func connectionStatusUpdate() {
@@ -383,6 +384,18 @@ class ViewModel : ObservableObject {
                         print("credential update state failed. error=", error!.localizedDescription)
                     } else {
                         print("credential update state successed. credentialHandle=\(credentialHandle) connectionHandle=\(connectionHandle) statue=\(status!)")
+                        if status! == CredentialStatus.accepted.rawValue {
+                            VcxAdaptor.shared.getCredential(
+                                credentialHandle: credentialHandle,
+                                completion: { error, credential in
+                                    if error != nil && error!._code > 0 {
+                                        print("get credential failed. error=", error!.localizedDescription)
+                                    } else {
+                                        print("get credential successed. credential=\(credential!)")
+                                    }
+                                }
+                            )
+                        }
                     }
                 }
             )
