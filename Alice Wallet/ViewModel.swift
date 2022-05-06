@@ -102,7 +102,10 @@ class ViewModel : ObservableObject {
     @Published var walletName = UserDefaults.standard.string(forKey:"WalletName") ?? "UnknownWallet"
     @Published var walletKey = UserDefaults.standard.string(forKey:"WalletKey") ?? ""
     @Published var walletKeyDerivationFunction = "ARGON2I_MOD"
+    
     @Published var walletOpened = false
+    @Published var poolOpened = false
+    @Published var agencyProvisioned = false
     
     @Published var ledgerGenesisURL = "http://test.bcovrin.vonx.io/genesis"
     @Published var genesisTransaction = UserDefaults.standard.string(forKey:"GenesisTransaction") ??  ""
@@ -126,18 +129,24 @@ class ViewModel : ObservableObject {
     @Published var credentials: [NSNumber:NSNumber] = [:]
     
     init() {
-        listWallets()
         if self.genesisTransaction == "" {
             loadGenesisTransaction()
         }
     }
     
-    func listWallets() {
+    func onboardingCompleted() -> Bool {
+        return walletOpened && poolOpened && agencyProvisioned
+    }
+    
+    func wallets() -> [String] {
         let wallets = VcxAdaptor.shared.listWallets()
+        var walletNames: [String] = []
         print("wallets:")
         for (index, wallet) in wallets.enumerated() {
-            print("\t* [\(index)] \(wallet.key)")
+            print("\t* [\(index)] \(wallet.lastPathComponent)")
+            walletNames.append(wallet.lastPathComponent)
         }
+        return walletNames
     }
     
     func createWallet() {
@@ -160,20 +169,20 @@ class ViewModel : ObservableObject {
         })
     }
     
-    func openMainWallet() {
+    func openWallet(name:String) {        
         let config = """
         {
-            "wallet_name": "\(walletName)",
+            "wallet_name": "\(name)",
             "wallet_key": "\(walletKey)",
             "wallet_key_derivation": "ARGON2I_MOD"
         }
         """
-        print("open main wallet. config=", config)
+        print("open wallet. config=", config)
         VcxAdaptor.shared.openMainWallet(config:config, completion:{ error, handle in
             if error != nil && error!._code > 0 {
-                print("open main wallet failed. handle=\(handle!), error=\(error!.localizedDescription)")
+                print("open wallet failed. handle=\(handle!), error=\(error!.localizedDescription)")
             } else {
-                print("open main wallet success. handle=\(handle!)")
+                print("open wallet success. handle=\(handle!)")
                 self.walletOpened = true
             }
         })

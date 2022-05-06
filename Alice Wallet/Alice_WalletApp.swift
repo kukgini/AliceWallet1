@@ -7,7 +7,7 @@ struct Alice_WalletApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if model.walletOpened {
+            if model.onboardingCompleted() {
                 ContentView(model:model)
             } else {
                 OnboardingFlowView(model:model)

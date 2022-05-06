@@ -21,20 +21,17 @@ class VcxAdaptor {
         _ = self.vcxInitThreadpool(config:VcxAdaptor.config)
     }
 
-    func listWallets() -> [String:URL] {
-        var wallets: [String:URL] = [:]
+    func listWallets() -> [URL] {
         let fileManager = FileManager.default
         var documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         documentsURL.appendPathComponent(".indy_client/wallet")
         do {
             let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
-            for fileURL in fileURLs {
-                wallets[fileURL.lastPathComponent] = fileURL
-            }
+            return fileURLs
         } catch {
             print("Error while enumerating wallets \(documentsURL.path): \(error.localizedDescription)")
         }
-        return wallets
+        return []
     }
     
     func createWallet(config:String, completion:((Error?) -> Void)?) {
