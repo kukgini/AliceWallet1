@@ -102,6 +102,8 @@ class ViewModel : ObservableObject {
     @Published var walletName = UserDefaults.standard.string(forKey:"WalletName") ?? "UnknownWallet"
     @Published var walletKey = UserDefaults.standard.string(forKey:"WalletKey") ?? ""
     @Published var walletKeyDerivationFunction = "ARGON2I_MOD"
+    @Published var walletOpened = false
+    
     @Published var ledgerGenesisURL = "http://test.bcovrin.vonx.io/genesis"
     @Published var genesisTransaction = UserDefaults.standard.string(forKey:"GenesisTransaction") ??  ""
     
@@ -172,6 +174,7 @@ class ViewModel : ObservableObject {
                 print("open main wallet failed. handle=\(handle!), error=\(error!.localizedDescription)")
             } else {
                 print("open main wallet success. handle=\(handle!)")
+                self.walletOpened = true
             }
         })
     }

@@ -12,7 +12,6 @@ class VcxAdaptor {
         """
     
     var vcx: ConnectMeVcx?
-    var mainWalletOpened = false
     
     private init () {
         print("init VCX logger.")
@@ -43,18 +42,9 @@ class VcxAdaptor {
     }
     
     func openMainWallet(config:String, completion:((Error?,NSNumber?) -> Void)?) {
-        self.vcx!.openMainWallet(config, completion:{ error, result in
-            if error == nil || error!._code == 0 {
-                self.mainWalletOpened = true
-            }
-            completion!(error,result)
-        })
+        self.vcx!.openMainWallet(config, completion:completion)
     }
 
-    func whenMainWalletOpened() -> Bool {
-        return self.mainWalletOpened
-    }
-    
     func vcxInitThreadpool(config:String) -> Int {
         print("init threadpool=", config)
         return Int(self.vcx!.vcxInitThreadpool(config))

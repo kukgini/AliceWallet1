@@ -7,7 +7,7 @@ struct Alice_WalletApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if VcxAdaptor.shared.whenMainWalletOpened() {
+            if model.walletOpened {
                 ContentView(model:model)
             } else {
                 WalletView(model:model)
