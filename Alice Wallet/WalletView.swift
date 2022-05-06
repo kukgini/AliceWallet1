@@ -59,7 +59,7 @@ struct AlertWrapper<Content: View>: UIViewControllerRepresentable {
 
 public struct TextAlert {
     public var title: String
-    public var placeholder: String = "123456"
+    public var placeholder: String = ""
     public var accept: String = "OK"
     public var cancel: String = "Cancel"
     public var action: (String?) -> ()
@@ -85,10 +85,12 @@ struct WalletView: View {
                             Text("\(walletName)")
                         }
                         .alert(isPresented: $showingAlert, TextAlert(title: "Open wallet", action: { placeholder in
-                            self.model.openWallet(name: walletName)
+                            self.model.openWallet(name: walletName, key: placeholder!)
                         }))
                     }
-                    createWalletButton()
+                    Button(action: { model.createWallet(name:"",key:"") }) {
+                        Text("Create Wallet")
+                    }
                 }
                 
             }
@@ -103,7 +105,7 @@ struct WalletView: View {
     }
     
     fileprivate func createWalletButton() -> some View {
-        return Button(action: model.createWallet) {
+        return Button(action: { model.createWallet(name:"",key:"") }) {
             Text("Create Wallet")
         }//.buttonStyle(.bordered)
     }

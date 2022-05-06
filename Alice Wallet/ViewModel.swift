@@ -100,8 +100,6 @@ public enum CredentialStatus: NSNumber {
 class ViewModel : ObservableObject {
 
     @Published var wallets: [String] = []
-    @Published var walletName = UserDefaults.standard.string(forKey:"WalletName") ?? "UnknownWallet"
-    @Published var walletKey = UserDefaults.standard.string(forKey:"WalletKey") ?? ""
     @Published var walletKeyDerivationFunction = "ARGON2I_MOD"
 
     @Published var ledgerGenesisURL = "http://test.bcovrin.vonx.io/genesis"
@@ -152,14 +150,12 @@ class ViewModel : ObservableObject {
         }
     }
     
-    func createWallet() {
-        UserDefaults.standard.set(walletName, forKey:"WalletName")
-        UserDefaults.standard.set(walletKey, forKey:"WalletKey")
+    func createWallet(name:String,key:String) {
         let config = """
         {
-            "wallet_name": "\(walletName)",
-            "wallet_key": "\(walletKey)",
-            "wallet_key_derivation": "\(walletKeyDerivationFunction)"
+            "wallet_name": "\(name)",
+            "wallet_key": "\(key)",
+            "wallet_key_derivation": "\(self.walletKeyDerivationFunction)"
         }
         """
         print("create wallet. config=", config)
@@ -172,12 +168,12 @@ class ViewModel : ObservableObject {
         })
     }
     
-    func openWallet(name:String) {        
+    func openWallet(name:String,key:String) {
         let config = """
         {
             "wallet_name": "\(name)",
-            "wallet_key": "\(walletKey)",
-            "wallet_key_derivation": "ARGON2I_MOD"
+            "wallet_key": "\(key)",
+            "wallet_key_derivation": "\(self.walletKeyDerivationFunction)"
         }
         """
         print("open wallet. config=", config)
