@@ -21,7 +21,7 @@ class VcxAdaptor {
         _ = self.vcxInitThreadpool(config:VcxAdaptor.config)
     }
 
-    func listWallets() -> [URL] {
+    func listWalletURLs() -> [URL] {
         let fileManager = FileManager.default
         var documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         documentsURL.appendPathComponent(".indy_client/wallet")

@@ -80,7 +80,7 @@ struct WalletView: View {
         VStack {
             Group {
                 List {
-                    ForEach(self.model.wallets(), id: \.self) { walletName in
+                    ForEach(self.model.wallets, id: \.self) { walletName in
                         Button(action: { showingAlert = true }) {
                             Text("\(walletName)")
                         }

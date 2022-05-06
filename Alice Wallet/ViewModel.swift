@@ -99,14 +99,11 @@ public enum CredentialStatus: NSNumber {
 
 class ViewModel : ObservableObject {
 
+    @Published var wallets: [String] = []
     @Published var walletName = UserDefaults.standard.string(forKey:"WalletName") ?? "UnknownWallet"
     @Published var walletKey = UserDefaults.standard.string(forKey:"WalletKey") ?? ""
     @Published var walletKeyDerivationFunction = "ARGON2I_MOD"
-    
-    @Published var walletOpened = false
-    @Published var poolOpened = false
-    @Published var agencyProvisioned = false
-    
+
     @Published var ledgerGenesisURL = "http://test.bcovrin.vonx.io/genesis"
     @Published var genesisTransaction = UserDefaults.standard.string(forKey:"GenesisTransaction") ??  ""
     
@@ -129,24 +126,30 @@ class ViewModel : ObservableObject {
     @Published var credentials: [NSNumber:NSNumber] = [:]
     
     init() {
+        self.loadWallets()
         if self.genesisTransaction == "" {
             loadGenesisTransaction()
         }
     }
     
+    @Published var walletOpened = false
+    @Published var poolOpened = false
+    @Published var agencyProvisioned = false
+    @Published var agencyClientCreated = false
+    
     func onboardingCompleted() -> Bool {
-        return walletOpened && poolOpened && agencyProvisioned
+        return walletOpened && poolOpened && agencyProvisioned && agencyClientCreated
     }
     
-    func wallets() -> [String] {
-        let wallets = VcxAdaptor.shared.listWallets()
-        var walletNames: [String] = []
+    func loadWallets() {
+        let urls = VcxAdaptor.shared.listWalletURLs()
+        self.wallets = []
         print("wallets:")
-        for (index, wallet) in wallets.enumerated() {
-            print("\t* [\(index)] \(wallet.lastPathComponent)")
-            walletNames.append(wallet.lastPathComponent)
+        for (index, url) in urls.enumerated() {
+            let walletName = url.lastPathComponent
+            print("\t* [\(index)] \(walletName)")
+            self.wallets.append(walletName)
         }
-        return walletNames
     }
     
     func createWallet() {
@@ -210,6 +213,7 @@ class ViewModel : ObservableObject {
                 print("open main pool failed. error=", error!.localizedDescription)
             } else {
                 print("open main pool successed.")
+                self.poolOpened = true
             }
         })
     }
@@ -234,6 +238,8 @@ class ViewModel : ObservableObject {
                 self.sdkToRemoteDid    = json["sdk_to_remote_did"].string!
                 self.sdkToRemoteVerkey = json["sdk_to_remote_verkey"].string!
                 print("json=\(json)")
+                
+                self.agencyProvisioned = true
             }
         })
     }
@@ -255,6 +261,7 @@ class ViewModel : ObservableObject {
                 print("provision cloud agent failed. error=", error!.localizedDescription)
             } else {
                 print("provision cloud agent successed.")
+                self.agencyClientCreated = true
             }
         })
     }
