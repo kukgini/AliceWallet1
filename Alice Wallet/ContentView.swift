@@ -6,16 +6,6 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            LedgerView(model:model)
-                .tabItem {
-                    Image(systemName: "globe")
-                    Text("Ledger")
-                }
-            AgencyView(model:model)
-                .tabItem {
-                    Image(systemName: "link.icloud")
-                    Text("Agency")
-                }
             ConnectionsView(model:model)
                 .tabItem {
                     Image(systemName: "list.dash")

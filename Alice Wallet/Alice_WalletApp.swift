@@ -10,7 +10,7 @@ struct Alice_WalletApp: App {
             if model.walletOpened {
                 ContentView(model:model)
             } else {
-                WalletView(model:model)
+                OnboardingFlowView(model:model)
             }
         }
     }
