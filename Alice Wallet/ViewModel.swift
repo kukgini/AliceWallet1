@@ -99,11 +99,11 @@ public enum CredentialStatus: NSNumber {
 
 class ViewModel : ObservableObject {
 
-    @Published var walletName = "alice"
-    @Published var walletKey = "123456"
+    @Published var walletName = UserDefaults.standard.string(forKey:"WalletName") ?? "UnknownWallet"
+    @Published var walletKey = UserDefaults.standard.string(forKey:"WalletKey") ?? ""
     @Published var walletKeyDerivationFunction = "ARGON2I_MOD"
     @Published var ledgerGenesisURL = "http://test.bcovrin.vonx.io/genesis"
-    @Published var genesisTransaction = ""
+    @Published var genesisTransaction = UserDefaults.standard.string(forKey:"GenesisTransaction") ??  ""
     
     @Published var agencyEndpoint = "https://devariesvcx.duckdns.org"
 //    @Published var agencyEndpoint = "https://ariesvcx.agency.staging.absa.id"
@@ -124,10 +124,29 @@ class ViewModel : ObservableObject {
     @Published var credentials: [NSNumber:NSNumber] = [:]
     
     init() {
-        
+        listWallets()
+        if self.genesisTransaction == "" {
+            loadGenesisTransaction()
+        }
     }
-        
+    
+    func listWallets() {
+        let fileManager = FileManager.default
+        var documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        documentsURL.appendPathComponent(".indy_client/wallet")
+        do {
+            let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
+            for fileURL in fileURLs {
+                print("wallet: \(fileURL.lastPathComponent)")
+            }
+        } catch {
+            print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
+        }
+    }
+    
     func createWallet() {
+        UserDefaults.standard.set(walletName, forKey:"WalletName")
+        UserDefaults.standard.set(walletKey, forKey:"WalletKey")
         let config = """
         {
             "wallet_name": "\(walletName)",
@@ -163,13 +182,17 @@ class ViewModel : ObservableObject {
         })
     }
     
-    func openMainPool() {
+    func loadGenesisTransaction() {
         // http://test.bcovrin.vonx.io/genesis
         let url = Bundle.main.url(forResource: "genesis", withExtension: "json")
         let jsonString = try! String(contentsOf: url!, encoding: .utf8)
         self.genesisTransaction = jsonString
+    }
+    
+    func openMainPool() {
+        // http://test.bcovrin.vonx.io/genesis
+        let url = Bundle.main.url(forResource: "genesis", withExtension: "json")
         print("genesis path=", url!.path)
-
         let config = """
         {
             "genesis_path": "\(url!.path)"

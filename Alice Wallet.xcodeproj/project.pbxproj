@@ -10,6 +10,7 @@
 		916219B92744C5350036888C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916219B82744C5350036888C /* ViewModel.swift */; };
 		9165FFE32751CC38009C1B82 /* LedgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9165FFE22751CC38009C1B82 /* LedgerView.swift */; };
 		919230402741F3B800A4D31D /* VcxAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9192303F2741F3B800A4D31D /* VcxAdaptor.swift */; };
+		91BC531828192BFE00F503B4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 91BC531628192BFE00F503B4 /* Model.xcdatamodeld */; };
 		91CF5075273F773700DFFCD7 /* Alice_WalletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CF5074273F773700DFFCD7 /* Alice_WalletApp.swift */; };
 		91CF5077273F773700DFFCD7 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CF5076273F773700DFFCD7 /* WalletView.swift */; };
 		91CF5079273F773800DFFCD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91CF5078273F773800DFFCD7 /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		916219B82744C5350036888C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		9165FFE22751CC38009C1B82 /* LedgerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LedgerView.swift; sourceTree = "<group>"; };
 		9192303F2741F3B800A4D31D /* VcxAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VcxAdaptor.swift; sourceTree = "<group>"; };
+		91BC531728192BFE00F503B4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		91CF5071273F773700DFFCD7 /* Alice Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Alice Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91CF5074273F773700DFFCD7 /* Alice_WalletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alice_WalletApp.swift; sourceTree = "<group>"; };
 		91CF5076273F773700DFFCD7 /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				91DB9C69274BB11F003632E6 /* ContentView.swift */,
 				9165FFE22751CC38009C1B82 /* LedgerView.swift */,
 				91F70EB327560E760004CC90 /* CredentialView.swift */,
+				91BC531628192BFE00F503B4 /* Model.xcdatamodeld */,
 			);
 			path = "Alice Wallet";
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				91DB9C6A274BB11F003632E6 /* ContentView.swift in Sources */,
 				919230402741F3B800A4D31D /* VcxAdaptor.swift in Sources */,
 				916219B92744C5350036888C /* ViewModel.swift in Sources */,
+				91BC531828192BFE00F503B4 /* Model.xcdatamodeld in Sources */,
 				91CF5075273F773700DFFCD7 /* Alice_WalletApp.swift in Sources */,
 				91DB9C68274B2FF4003632E6 /* AgencyView.swift in Sources */,
 			);
@@ -455,6 +459,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		91BC531628192BFE00F503B4 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				91BC531728192BFE00F503B4 /* Model.xcdatamodel */,
+			);
+			currentVersion = 91BC531728192BFE00F503B4 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 91CF5069273F773700DFFCD7 /* Project object */;
 }
