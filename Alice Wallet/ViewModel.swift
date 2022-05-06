@@ -131,16 +131,10 @@ class ViewModel : ObservableObject {
     }
     
     func listWallets() {
-        let fileManager = FileManager.default
-        var documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        documentsURL.appendPathComponent(".indy_client/wallet")
-        do {
-            let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
-            for fileURL in fileURLs {
-                print("wallet: \(fileURL.lastPathComponent)")
-            }
-        } catch {
-            print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
+        let wallets = VcxAdaptor.shared.listWallets()
+        print("wallets:")
+        for (index, wallet) in wallets.enumerated() {
+            print("\t* [\(index)] \(wallet.key)")
         }
     }
     

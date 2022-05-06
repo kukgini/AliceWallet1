@@ -12,6 +12,7 @@ class VcxAdaptor {
         """
     
     var vcx: ConnectMeVcx?
+    var mainWalletOpened = false
     
     private init () {
         print("init VCX logger.")
@@ -21,14 +22,39 @@ class VcxAdaptor {
         _ = self.vcxInitThreadpool(config:VcxAdaptor.config)
     }
 
+    func listWallets() -> [String:URL] {
+        var wallets: [String:URL] = [:]
+        let fileManager = FileManager.default
+        var documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        documentsURL.appendPathComponent(".indy_client/wallet")
+        do {
+            let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
+            for fileURL in fileURLs {
+                wallets[fileURL.lastPathComponent] = fileURL
+            }
+        } catch {
+            print("Error while enumerating wallets \(documentsURL.path): \(error.localizedDescription)")
+        }
+        return wallets
+    }
+    
     func createWallet(config:String, completion:((Error?) -> Void)?) {
         self.vcx!.createWallet(config, completion:completion)
     }
     
     func openMainWallet(config:String, completion:((Error?,NSNumber?) -> Void)?) {
-        self.vcx!.openMainWallet(config, completion:completion)
+        self.vcx!.openMainWallet(config, completion:{ error, result in
+            if error == nil || error!._code == 0 {
+                self.mainWalletOpened = true
+            }
+            completion!(error,result)
+        })
     }
 
+    func whenMainWalletOpened() -> Bool {
+        return self.mainWalletOpened
+    }
+    
     func vcxInitThreadpool(config:String) -> Int {
         print("init threadpool=", config)
         return Int(self.vcx!.vcxInitThreadpool(config))
