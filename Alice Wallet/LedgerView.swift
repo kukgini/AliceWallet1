@@ -7,7 +7,7 @@ struct LedgerView: View {
     @State private var showingAlert = false
     
     var body: some View {
-        VStack {
+        //VStack {
             Group {
                 List {
                     ForEach(self.model.networks, id: \.self) { txURL in
@@ -27,7 +27,7 @@ struct LedgerView: View {
                     }
                 }
             }
-        }
+        //}
     }
 }
 

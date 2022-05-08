@@ -77,37 +77,21 @@ struct WalletView: View {
     @State private var showingAlert = false
     
     var body: some View {
-        VStack {
-            Group {
-                List {
-                    ForEach(self.model.wallets, id: \.self) { walletName in
-                        Button(action: { showingAlert = true }) {
-                            Text("\(walletName)")
-                        }
-                        .alertWithInput(isPresented: $showingAlert, TextAlert(title: "Open wallet", action: { placeholder in
-                            self.model.openWallet(name: walletName, key: placeholder!)
-                        }))
-                    }
-                    Button(action: { model.createWallet(name:"",key:"") }) {
-                        Text("Create Wallet")
-                    }
+        List {
+            ForEach(self.model.wallets, id: \.self) { walletName in
+                Button(action: { showingAlert = true }) {
+                    Text("\(walletName)")
                 }
-                
+                .alertWithInput(isPresented: $showingAlert, TextAlert(title: "Open wallet", action: { placeholder in
+                    self.model.openWallet(name: walletName, key: placeholder!)
+                }))
             }
-            Spacer()
+            Button(action: { model.createWallet(name:"",key:"") }) {
+                Text("Create Wallet")
+            }.alertWithInput(isPresented: $showingAlert, TextAlert(title: "Create wallet", action: { placeholder in
+                self.model.openWallet(name: "", key: placeholder!)
+            }))
         }
-    }
-    
-    fileprivate func walletItemView(id:String) -> some View {
-        return HStack {
-            
-        }
-    }
-    
-    fileprivate func createWalletButton() -> some View {
-        return Button(action: { model.createWallet(name:"",key:"") }) {
-            Text("Create Wallet")
-        }//.buttonStyle(.bordered)
     }
 }
 
