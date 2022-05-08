@@ -23,19 +23,17 @@ class VcxAdaptor {
 
     func listWalletURLs() -> [URL] {
         let fileManager = FileManager.default
-        var documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        documentsURL.appendPathComponent(".indy_client/wallet")
-        do {
-            let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
-            return fileURLs
-        } catch {
-            print("Error while enumerating wallets \(documentsURL.path): \(error.localizedDescription)")
-        }
-        return []
+        var url = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        url.appendPathComponent(".indy_client/wallet")
+        return try! fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
     }
     
     func createWallet(config:String, completion:((Error?) -> Void)?) {
         self.vcx!.createWallet(config, completion:completion)
+    }
+    
+    func listNetworkTxURLs() -> [URL] {
+        return Bundle.main.urls(forResourcesWithExtension: nil, subdirectory: "Networks")!
     }
     
     func openMainWallet(config:String, completion:((Error?,NSNumber?) -> Void)?) {

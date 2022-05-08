@@ -100,6 +100,8 @@ public enum CredentialStatus: NSNumber {
 class ViewModel : ObservableObject {
 
     @Published var wallets: [String] = []
+    @Published var networks: [URL] = []
+    
     @Published var walletKeyDerivationFunction = "ARGON2I_MOD"
 
     @Published var ledgerGenesisURL = "http://test.bcovrin.vonx.io/genesis"
@@ -125,9 +127,7 @@ class ViewModel : ObservableObject {
     
     init() {
         self.loadWallets()
-        if self.genesisTransaction == "" {
-            loadGenesisTransaction()
-        }
+        self.loadNetworks()
     }
     
     @Published var walletOpened = false
@@ -187,20 +187,21 @@ class ViewModel : ObservableObject {
         })
     }
     
-    func loadGenesisTransaction() {
-        // http://test.bcovrin.vonx.io/genesis
-        let url = Bundle.main.url(forResource: "genesis", withExtension: "json")
-        let jsonString = try! String(contentsOf: url!, encoding: .utf8)
-        self.genesisTransaction = jsonString
+    func loadNetworks() {
+        self.networks = VcxAdaptor.shared.listNetworkTxURLs()
+        print("networks:")
+        for (index, url) in self.networks.enumerated() {
+            let networkName = url.lastPathComponent
+            print("\t* [\(index)] \(networkName)")
+        }
     }
     
-    func openMainPool() {
-        // http://test.bcovrin.vonx.io/genesis
-        let url = Bundle.main.url(forResource: "genesis", withExtension: "json")
-        print("genesis path=", url!.path)
+    func openMainPool(name:String) {
+        let url = Bundle.main.url(forResource:"Networks/\(name)", withExtension: "json")!
         let config = """
         {
-            "genesis_path": "\(url!.path)"
+            "genesis_path": "\(url.path)",
+            "pool_name": "\(name)"
         }
         """
         print("open main pool. config=\n", config)

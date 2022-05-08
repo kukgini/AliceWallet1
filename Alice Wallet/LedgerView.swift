@@ -4,35 +4,30 @@ struct LedgerView: View {
     
     @ObservedObject var model: ViewModel = ViewModel()
     @FocusState var genesisTxSettingsIsFocused: Bool
+    @State private var showingAlert = false
     
     var body: some View {
-        ScrollView() {
-            VStack {
-                Group {
-                    genesisTxSettings()
-                    openMainPoolButton()
+        VStack {
+            Group {
+                List {
+                    ForEach(self.model.networks, id: \.self) { txURL in
+                        let txName = txURL.deletingPathExtension().lastPathComponent
+                        Button(action: { showingAlert = true }) {
+                            Text("\(txName)")
+                        }
+                        .alert(isPresented: $showingAlert) {
+                            Alert(
+                                title: Text("Open pool"),
+                                message: Text("open pool \(txName)"),
+                                primaryButton: .destructive(Text("Open"), action: {
+                                    model.openMainPool(name: txName)
+                                }),
+                                secondaryButton: .cancel())
+                        }
+                    }
                 }
             }
-            Spacer()
         }
-    }
-    
-    fileprivate func genesisTxSettings() -> some View {
-        TextEditor(text: $model.genesisTransaction)
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 500, maxHeight: 500)
-            .border(Color.gray)
-            .textFieldStyle(.roundedBorder)
-            .keyboardType(.default)
-            .focused($genesisTxSettingsIsFocused)
-    }
-    
-    fileprivate func openMainPoolButton() -> some View {
-        return Button(action: {
-            self.genesisTxSettingsIsFocused = false
-            model.openMainPool()
-        }) {
-            Text("Open Main Pool")
-        }.buttonStyle(.bordered)
     }
 }
 

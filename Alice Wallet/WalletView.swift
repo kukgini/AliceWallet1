@@ -66,7 +66,7 @@ public struct TextAlert {
 }
 
 extension View {
-    public func alert(isPresented: Binding<Bool>, _ alert: TextAlert) -> some View {
+    public func alertWithInput(isPresented: Binding<Bool>, _ alert: TextAlert) -> some View {
         AlertWrapper(isPresented: isPresented, alert: alert, content: self)
     }
 }
@@ -84,7 +84,7 @@ struct WalletView: View {
                         Button(action: { showingAlert = true }) {
                             Text("\(walletName)")
                         }
-                        .alert(isPresented: $showingAlert, TextAlert(title: "Open wallet", action: { placeholder in
+                        .alertWithInput(isPresented: $showingAlert, TextAlert(title: "Open wallet", action: { placeholder in
                             self.model.openWallet(name: walletName, key: placeholder!)
                         }))
                     }

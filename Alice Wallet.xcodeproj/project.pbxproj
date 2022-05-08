@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		913EFE9128279C20007DA561 /* Networks in Resources */ = {isa = PBXBuildFile; fileRef = 913EFE9028279C20007DA561 /* Networks */; };
 		916219B92744C5350036888C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916219B82744C5350036888C /* ViewModel.swift */; };
 		9165FFE32751CC38009C1B82 /* LedgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9165FFE22751CC38009C1B82 /* LedgerView.swift */; };
 		9180659F2824B67300F8A98B /* OnboardingFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9180659E2824B67300F8A98B /* OnboardingFlowView.swift */; };
@@ -29,6 +30,7 @@
 		27A867E94489D67132E7F18F /* Pods_Alice_Wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alice_Wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C9D1CCD54447902019D492 /* Pods-Alice Wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alice Wallet.release.xcconfig"; path = "Target Support Files/Pods-Alice Wallet/Pods-Alice Wallet.release.xcconfig"; sourceTree = "<group>"; };
 		91023B702743592A0083A5AB /* genesis.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = genesis.json; sourceTree = "<group>"; };
+		913EFE9028279C20007DA561 /* Networks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Networks; sourceTree = "<group>"; };
 		916219B82744C5350036888C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		9165FFE22751CC38009C1B82 /* LedgerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LedgerView.swift; sourceTree = "<group>"; };
 		9180659E2824B67300F8A98B /* OnboardingFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowView.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		91CF5073273F773700DFFCD7 /* Alice Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				913EFE9028279C20007DA561 /* Networks */,
 				91023B702743592A0083A5AB /* genesis.json */,
 				91CF5074273F773700DFFCD7 /* Alice_WalletApp.swift */,
 				91CF5076273F773700DFFCD7 /* WalletView.swift */,
@@ -182,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				91E1A09627E8A4300010562C /* genesis.json in Resources */,
+				913EFE9128279C20007DA561 /* Networks in Resources */,
 				91CF507C273F773800DFFCD7 /* Preview Assets.xcassets in Resources */,
 				91CF5079273F773800DFFCD7 /* Assets.xcassets in Resources */,
 			);
