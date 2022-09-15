@@ -107,8 +107,7 @@ class ViewModel : ObservableObject {
     @Published var ledgerGenesisURL = "http://test.bcovrin.vonx.io/genesis"
     @Published var genesisTransaction = UserDefaults.standard.string(forKey:"GenesisTransaction") ??  ""
     
-    @Published var agencyEndpoint = "https://devariesvcx.duckdns.org"
-//    @Published var agencyEndpoint = "https://ariesvcx.agency.staging.absa.id"
+    @Published var agencyEndpoint = "https://ariesvcx.agency.staging.absa.id"
     @Published var agencyDid = "VsKV7grR1BUE29mG2Fm2kX"
     @Published var agencyVerkey = "Hezce2UWMZ3wUhVkh2LfKSs8nDzWwzs2Win7EzNN3YaR"
 
