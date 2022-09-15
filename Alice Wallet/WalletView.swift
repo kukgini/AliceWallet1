@@ -90,6 +90,7 @@ struct WalletView: View {
                     Text("Wallet Opened")
                 } else {
                     Button(action: { self.model.openWallet() }) {
+                        Image(systemName:"qrcode.viewfinder")
                         Text("Open Wallet")
                     }
                 }

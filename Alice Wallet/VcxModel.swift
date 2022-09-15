@@ -181,22 +181,22 @@ class VcxModel : ObservableObject {
             [weak self] (res, err) in
             DispatchQueue.main.async {
                 print("confirmed you are you.")
+                let config = JSON([
+                    "wallet_name": self!.walletId,
+                    "wallet_key": self!.walletKey,
+                    "wallet_key_derivation": self!.walletKeyDerivationFunction
+                ]).rawString([.encoding:String.Encoding.utf8])!
+                print("open wallet. config=", config)
+                self!.vcx.openMainWallet(config:config, completion:{ error, handle in
+                    if error != nil && error!._code > 0 {
+                        print("open wallet failed. handle=\(handle!), error=\(error!.localizedDescription)")
+                    } else {
+                        print("open wallet success. handle=\(handle!)")
+                        self!.walletOpened = true
+                    }
+                })
             }
         }
-        let config = JSON([
-            "wallet_name": walletId,
-            "wallet_key": walletKey,
-            "wallet_key_derivation": self.walletKeyDerivationFunction
-        ]).rawString([.encoding:String.Encoding.utf8])!
-        print("open wallet. config=", config)
-        self.vcx.openMainWallet(config:config, completion:{ error, handle in
-            if error != nil && error!._code > 0 {
-                print("open wallet failed. handle=\(handle), error=\(error!.localizedDescription)")
-            } else {
-                print("open wallet success. handle=\(handle)")
-                self.walletOpened = true
-            }
-        })
     }
     
     func loadNetworks() {
