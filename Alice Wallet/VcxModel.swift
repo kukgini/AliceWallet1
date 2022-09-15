@@ -100,13 +100,15 @@ public enum CredentialStatus: NSNumber {
 
 class VcxModel : ObservableObject {
 
+    
+    static let walletId = "MyWallet"
+    static let walletKey = "MySecretPassword"
+    static let walletKeyDerivationFunction = "ARGON2I_MOD"
+    
     let vcx: VcxAdaptor
-    let walletId = "MyWallet"
-    let walletKey = "MySecretPassword"
+    let walletConfig: String
     
     @Published var networks: [URL] = []
-    
-    @Published var walletKeyDerivationFunction = "ARGON2I_MOD"
 
     @Published var ledgerGenesisURL = "http://test.bcovrin.vonx.io/genesis"
     @Published var genesisTransaction = UserDefaults.standard.string(forKey:"GenesisTransaction") ??  ""
@@ -129,6 +131,11 @@ class VcxModel : ObservableObject {
     @Published var credentials: [NSNumber:NSNumber] = [:]
     
     init() {
+        self.walletConfig = JSON([
+            "wallet_name": VcxModel.walletId,
+            "wallet_key": VcxModel.walletKey,
+            "wallet_key_derivation": VcxModel.walletKeyDerivationFunction
+        ]).rawString([.encoding:String.Encoding.utf8])!
         self.vcx = VcxAdaptor()
         self.checkWalletExists()
         self.loadNetworks()
@@ -148,7 +155,7 @@ class VcxModel : ObservableObject {
         if let urls = vcx.getWallets() {
             for url in urls {
                 let name = url.lastPathComponent
-                if name == walletId { walletExists = true }
+                if name == VcxModel.walletId { walletExists = true }
             }
         }
     }
@@ -159,13 +166,8 @@ class VcxModel : ObservableObject {
     }
     
     func createWallet() {
-        let config = JSON([
-            "wallet_name": walletId,
-            "wallet_key": walletKey,
-            "wallet_key_derivation": self.walletKeyDerivationFunction
-        ]).rawString([.encoding:String.Encoding.utf8])!
-        print("create wallet. config=", config)
-        self.vcx.createWallet(config:config, completion:{ error in
+        print("create wallet. config=", self.walletConfig)
+        self.vcx.createWallet(config:self.walletConfig, completion:{ error in
             if error != nil && error!._code > 0 {
                 print("create wallet failed: ", error!.localizedDescription)
             } else {
@@ -180,14 +182,9 @@ class VcxModel : ObservableObject {
         context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason:"지갑을 열겠습니다.") {
             [weak self] (res, err) in
             DispatchQueue.main.async {
-                print("confirmed you are you.")
-                let config = JSON([
-                    "wallet_name": self!.walletId,
-                    "wallet_key": self!.walletKey,
-                    "wallet_key_derivation": self!.walletKeyDerivationFunction
-                ]).rawString([.encoding:String.Encoding.utf8])!
-                print("open wallet. config=", config)
-                self!.vcx.openMainWallet(config:config, completion:{ error, handle in
+                print("wallet open approved.")
+                print("open wallet. config=", self!.walletConfig)
+                self!.vcx.openMainWallet(config:self!.walletConfig, completion:{ error, handle in
                     if error != nil && error!._code > 0 {
                         print("open wallet failed. handle=\(handle!), error=\(error!.localizedDescription)")
                     } else {
