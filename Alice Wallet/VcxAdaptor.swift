@@ -1,23 +1,21 @@
 import Foundation
 import Combine
+import SwiftyJSON
 import vcx
 
 class VcxAdaptor {
     
-    static let config = """
-            {
-                "num_thread": 0
-            }
-        """
+    static let config = ["num_thread":0]
     
     let vcx: ConnectMeVcx?
     
     init () {
-        print("init VCX logger.")
+        print("inititialize VcxLogger.")
         VcxLogger.setDefault(nil)
-        print("create VCX wrapper instance.")
+        print("create ConnectMeVcx instance.")
         self.vcx = ConnectMeVcx()
-        _ = self.vcxInitThreadpool(config:VcxAdaptor.config)
+        let config = JSON(VcxAdaptor.config)
+        _ = self.vcxInitThreadpool(config:config.string!)
     }
 
     func listWalletURLs() -> [URL] {
