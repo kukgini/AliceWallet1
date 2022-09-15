@@ -97,10 +97,8 @@ public enum CredentialStatus: NSNumber {
     }
 }
 
-
 class VcxModel : ObservableObject {
 
-    
     static let walletId = "MyWallet"
     static let walletKey = "MySecretPassword"
     static let walletKeyDerivationFunction = "ARGON2I_MOD"
@@ -117,10 +115,12 @@ class VcxModel : ObservableObject {
     @Published var agencyDid = "VsKV7grR1BUE29mG2Fm2kX"
     @Published var agencyVerkey = "Hezce2UWMZ3wUhVkh2LfKSs8nDzWwzs2Win7EzNN3YaR"
 
-    @Published var remoteToSdkDid = "" // pairwise DID of this client's agent in the agency. aka, remote_to_sdk_did
-    @Published var remoteToSdkVerkey = "" // verkey of this client's agent in the agency. aka, remote_to_sdk_verkey
-    @Published var sdkToRemoteDid = "" // pairwise DID of this client used to communicate with it's agent in the agency. aka, sdk_to_remote_did
-    @Published var sdkToRemoteVerkey = "" // verkey of this client used to commnicate with it's agent in the agency. aka, sdk_to_remote_verkey
+    // pairwise DID of this client's agent in the agency.
+    @Published var remoteToSdkDid: String = UserDefaults.standard.string(forKey: "remoteToSdkDid") ?? ""
+    @Published var remoteToSdkVerkey: String = UserDefaults.standard.string(forKey: "remoteToSdkVerkey") ?? ""
+    @Published var sdkToRemoteDid: String = UserDefaults.standard.string(forKey: "sdkToRemoteDid") ?? ""
+    @Published var sdkToRemoteVerkey: String = UserDefaults.standard.string(forKey: "sdkToRemoteVerkey") ?? ""
+    
     @Published var inviteDetails = ""
     @Published var connections: [String:(
         handle:NSNumber,
@@ -244,6 +244,11 @@ class VcxModel : ObservableObject {
                 self.sdkToRemoteDid    = json["sdk_to_remote_did"].string!
                 self.sdkToRemoteVerkey = json["sdk_to_remote_verkey"].string!
                 print("json=\(json)")
+                
+                UserDefaults.standard.set(self.remoteToSdkDid,    forKey: "remoteToSdkDid")
+                UserDefaults.standard.set(self.remoteToSdkVerkey, forKey: "remoteToSdkVerkey")
+                UserDefaults.standard.set(self.sdkToRemoteDid,    forKey: "sdkToRemoteDid")
+                UserDefaults.standard.set(self.sdkToRemoteVerkey, forKey: "sdkToRemoteVerkey")
                 
                 self.agencyProvisioned = true
             }
