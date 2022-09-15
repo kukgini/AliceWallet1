@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CredentialView: View {
     
-    @ObservedObject var model: ViewModel = ViewModel()
+    @EnvironmentObject var model: VcxModel
     
     var body: some View {
         VStack {

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct LedgerView: View {
     
-    @ObservedObject var model: ViewModel = ViewModel()
+    @EnvironmentObject var model: VcxModel
     @FocusState var genesisTxSettingsIsFocused: Bool
     @State private var showingAlert = false
     

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct AgencyView: View {
     
-    @ObservedObject var model: ViewModel = ViewModel()
+    @EnvironmentObject var model: VcxModel
     
     var body: some View {
         ScrollView() {

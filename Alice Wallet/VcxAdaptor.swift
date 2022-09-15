@@ -4,16 +4,15 @@ import vcx
 
 class VcxAdaptor {
     
-    static let shared = VcxAdaptor()
     static let config = """
             {
                 "num_thread": 0
             }
         """
     
-    var vcx: ConnectMeVcx?
+    let vcx: ConnectMeVcx?
     
-    private init () {
+    init () {
         print("init VCX logger.")
         VcxLogger.setDefault(nil)
         print("create VCX wrapper instance.")

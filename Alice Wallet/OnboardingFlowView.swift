@@ -9,13 +9,11 @@ import SwiftUI
 
 struct OnboardingFlowView: View {
     
-    @ObservedObject var model: ViewModel = ViewModel()
-    
     var body: some View {
         TabView {
-            WalletView(model:model)
-            LedgerView(model:model)
-            AgencyView(model:model)
+            WalletView()
+            LedgerView()
+            AgencyView()
         }
         .tabViewStyle(.page)
         .indexViewStyle(

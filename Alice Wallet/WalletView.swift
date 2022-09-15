@@ -73,7 +73,7 @@ extension View {
 
 struct WalletView: View {
     
-    @ObservedObject var model: ViewModel = ViewModel()
+    @EnvironmentObject var model: VcxModel
     @State private var showingAlert = false
     
     var body: some View {
@@ -86,7 +86,7 @@ struct WalletView: View {
                     self.model.openWallet(name: walletName, key: placeholder!)
                 }))
             }
-            Button(action: { model.createWallet(name:"",key:"") }) {
+            Button(action: { model.createWallet(name:"MyWallet",key:"1234") }) {
                 Text("Create Wallet")
             }.alertWithInput(isPresented: $showingAlert, TextAlert(title: "Create wallet", action: { placeholder in
                 self.model.openWallet(name: "", key: placeholder!)
@@ -97,6 +97,6 @@ struct WalletView: View {
 
 struct WalletView_Previews: PreviewProvider {
     static var previews: some View {
-        WalletView(model: ViewModel())
+        WalletView().environmentObject(MockModel())
     }
 }

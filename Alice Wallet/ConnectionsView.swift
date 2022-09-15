@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ConnectionsView: View {
     
-    @ObservedObject var model: ViewModel = ViewModel()
+    @EnvironmentObject var model: VcxModel
     @FocusState var invitationSettingsIsFocused: Bool
     @FocusState var messageEditorIsFocused: Bool
     

@@ -97,8 +97,10 @@ public enum CredentialStatus: NSNumber {
 }
 
 
-class ViewModel : ObservableObject {
+class VcxModel : ObservableObject {
 
+    let vcx: VcxAdaptor
+    
     @Published var wallets: [String] = []
     @Published var networks: [URL] = []
     
@@ -125,6 +127,7 @@ class ViewModel : ObservableObject {
     @Published var credentials: [NSNumber:NSNumber] = [:]
     
     init() {
+        self.vcx = VcxAdaptor()
         self.loadWallets()
         self.loadNetworks()
     }
@@ -139,7 +142,7 @@ class ViewModel : ObservableObject {
     }
     
     func loadWallets() {
-        let urls = VcxAdaptor.shared.listWalletURLs()
+        let urls = self.vcx.listWalletURLs()
         self.wallets = []
         print("wallets:")
         for (index, url) in urls.enumerated() {
@@ -158,7 +161,7 @@ class ViewModel : ObservableObject {
         }
         """
         print("create wallet. config=", config)
-        VcxAdaptor.shared.createWallet(config:config, completion:{ error in
+        self.vcx.createWallet(config:config, completion:{ error in
             if error != nil && error!._code > 0 {
                 print("create wallet failed: ", error!.localizedDescription)
             } else {
@@ -176,7 +179,7 @@ class ViewModel : ObservableObject {
         }
         """
         print("open wallet. config=", config)
-        VcxAdaptor.shared.openMainWallet(config:config, completion:{ error, handle in
+        self.vcx.openMainWallet(config:config, completion:{ error, handle in
             if error != nil && error!._code > 0 {
                 print("open wallet failed. handle=\(handle!), error=\(error!.localizedDescription)")
             } else {
@@ -187,7 +190,7 @@ class ViewModel : ObservableObject {
     }
     
     func loadNetworks() {
-        self.networks = VcxAdaptor.shared.listNetworkTxURLs()
+        self.networks = self.vcx.listNetworkTxURLs()
         print("networks:")
         for (index, url) in self.networks.enumerated() {
             let networkName = url.lastPathComponent
@@ -204,7 +207,7 @@ class ViewModel : ObservableObject {
         }
         """
         print("open main pool. config=\n", config)
-        VcxAdaptor.shared.vcxOpenMainPool(config:config, completion:{ error in
+        self.vcx.vcxOpenMainPool(config:config, completion:{ error in
             if error != nil && error!._code > 0 {
                 print("open main pool failed. error=", error!.localizedDescription)
             } else {
@@ -223,7 +226,7 @@ class ViewModel : ObservableObject {
         }
         """
         print("provision cloud agent. config=", config)
-        VcxAdaptor.shared.vcxProvisionCloudAgent(config: config, completion: { error, result in
+        self.vcx.vcxProvisionCloudAgent(config: config, completion: { error, result in
             if error != nil && error!._code > 0 {
                 print("provision cloud agent failed. error=", error!.localizedDescription)
             } else {
@@ -252,7 +255,7 @@ class ViewModel : ObservableObject {
             "sdk_to_remote_verkey": "\(sdkToRemoteVerkey)"
         }
         """
-        VcxAdaptor.shared.vcxCreateAgencyClient(forMainWallet: config, completion: { error in
+        self.vcx.vcxCreateAgencyClient(forMainWallet: config, completion: { error in
             if error != nil && error!._code > 0 {
                 print("provision cloud agent failed. error=", error!.localizedDescription)
             } else {
@@ -293,7 +296,7 @@ class ViewModel : ObservableObject {
     
     func connectionCreate(id:String,invitateDetails:JSON) {
         print("connection create. id=\(id), inviteDetails=\(invitateDetails)")
-        VcxAdaptor.shared.connectionCreate(
+        self.vcx.connectionCreate(
             withInvite: id,
             inviteDetails: inviteDetails,
             completion: { error, handle in
@@ -315,7 +318,7 @@ class ViewModel : ObservableObject {
         let c = connections[id]!
         let connectionType = "{\"use_public_did\":false}"
         print("connection connect. id=\(id), handle=\(c.handle), connectionType=\(connectionType)")
-        VcxAdaptor.shared.connectionConnect(
+        self.vcx.connectionConnect(
             withHandle:c.handle,
             connectionType:connectionType,
             completion: { error in
@@ -330,7 +333,7 @@ class ViewModel : ObservableObject {
     
     func connectionStatusGet(id:String) {
         let c = connections[id]!
-        VcxAdaptor.shared.connectionGetState(
+        self.vcx.connectionGetState(
             withHandle: c.handle,
             completion: { error, status in
                 if error != nil && error!._code > 0 {
@@ -351,7 +354,7 @@ class ViewModel : ObservableObject {
     func connectionStatusUpdate() {
         for (id, c) in connections {
             print("connection status update. id=\(id), handle=\(c.handle), statue=\(c.status)")
-            VcxAdaptor.shared.connectionUpdateState(
+            self.vcx.connectionUpdateState(
                 withHandle:c.handle,
                 completion: {error, status in
                     if error != nil && error!._code > 0 {
@@ -372,7 +375,7 @@ class ViewModel : ObservableObject {
     func credentialsStatusUpdate() {
         self.connectionStatusUpdate()
         for (id, c) in connections {
-            VcxAdaptor.shared.credentialGetOffers(
+            self.vcx.credentialGetOffers(
                 withHandle:c.handle,
                 completion:{error, offers in
                     if error != nil && error!._code > 0 {
@@ -380,7 +383,7 @@ class ViewModel : ObservableObject {
                     } else {
                         print("get credential offers for connection id=\(id) successed.")
                         let offer = offers?.dropFirst().dropLast()
-                        VcxAdaptor.shared.credentialCreateWithOffer(
+                        self.vcx.credentialCreateWithOffer(
                             sourceId:id,
                             offer:String(offer!),
                             completion: { error, credentialHandle in
@@ -389,7 +392,7 @@ class ViewModel : ObservableObject {
                                 } else {
                                     print("create credential with offer successed. credentialHandle=", credentialHandle!)
                                     self.credentials[credentialHandle!] = c.handle
-                                    VcxAdaptor.shared.credentialSendRequest(
+                                    self.vcx.credentialSendRequest(
                                         credentialHandle: credentialHandle!,
                                         connectionHandle: c.handle,
                                         completion: { error in
@@ -408,7 +411,7 @@ class ViewModel : ObservableObject {
             )
         }
         for (credentialHandle, connectionHandle) in credentials {
-            VcxAdaptor.shared.credentialUpdateStateV2(
+            self.vcx.credentialUpdateStateV2(
                 credentialHandle: credentialHandle,
                 connectionHandle: connectionHandle,
                 completion: { error, status in
@@ -417,7 +420,7 @@ class ViewModel : ObservableObject {
                     } else {
                         print("credential update state successed. credentialHandle=\(credentialHandle) connectionHandle=\(connectionHandle) statue=\(status!)")
                         if status! == CredentialStatus.accepted.rawValue {
-                            VcxAdaptor.shared.getCredential(
+                            self.vcx.getCredential(
                                 credentialHandle: credentialHandle,
                                 completion: { error, credential in
                                     if error != nil && error!._code > 0 {
@@ -451,7 +454,7 @@ class ViewModel : ObservableObject {
     func connectionSendMessage(id:String) {
         let c = self.connections[id]!
         print("connection send message. id=\(id), handle=\(c.handle), statue=\(c.status)")
-        VcxAdaptor.shared.connectionSendBasicMessage(
+        self.vcx.connectionSendBasicMessage(
             withHandle:c.handle,
             message: self.message,
             options: "",
@@ -467,7 +470,7 @@ class ViewModel : ObservableObject {
     func credentialGetOffers(id:String) {
         let c = self.connections[id]!
         print("credential get offers in connection. id=\(id)")
-        VcxAdaptor.shared.credentialGetOffers(
+        self.vcx.credentialGetOffers(
             withHandle:c.handle,
             completion: {error, offers in
                 if error != nil && error!._code > 0 {
