@@ -66,31 +66,40 @@ public struct TextAlert {
 }
 
 extension View {
-    public func alertWithInput(isPresented: Binding<Bool>, _ alert: TextAlert) -> some View {
-        AlertWrapper(isPresented: isPresented, alert: alert, content: self)
+    public func openWalletPromptUI(isPresented: Binding<Bool>, _ alert: TextAlert) -> some View {
+        AlertWrapper(isPresented: isPresented, alert:alert, content: self)
+    }
+    public func createWalletPromptUI(isPresented: Binding<Bool>, _ alert: TextAlert) -> some View {
+        AlertWrapper(isPresented: isPresented, alert:alert, content: self)
     }
 }
 
 struct WalletView: View {
     
     @EnvironmentObject var model: VcxModel
-    @State private var showingAlert = false
+    @State private var showOpenWalletPromptUI = false
+    @State private var showCreateWalletPromptUI = false
     
     var body: some View {
         List {
             ForEach(self.model.wallets, id: \.self) { walletName in
-                Button(action: { showingAlert = true }) {
+                Button(action: { showOpenWalletPromptUI = true }) {
                     Text("\(walletName)")
                 }
-                .alertWithInput(isPresented: $showingAlert, TextAlert(title: "Open wallet", action: { placeholder in
-                    self.model.openWallet(name: walletName, key: placeholder!)
-                }))
+                .openWalletPromptUI(
+                    isPresented:$showOpenWalletPromptUI,
+                    TextAlert(title:"Open wallet", action:{ walletKey in self.model.openWallet(name:walletName, key:walletKey!)})
+                )
             }
-            Button(action: { model.createWallet(name:"MyWallet",key:"1234") }) {
+            Button(action: { showCreateWalletPromptUI = true }) {
                 Text("Create Wallet")
-            }.alertWithInput(isPresented: $showingAlert, TextAlert(title: "Create wallet", action: { placeholder in
-                self.model.openWallet(name: "", key: placeholder!)
-            }))
+            }.createWalletPromptUI(
+                isPresented: $showCreateWalletPromptUI,
+                TextAlert(title:"Create wallet", action:{
+                    walletName in
+                    self.model.createWallet(name:walletName!,key:"1234")
+                    self.model.openWallet(name:walletName!, key:"1234")
+                }))
         }
     }
 }
