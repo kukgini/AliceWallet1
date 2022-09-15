@@ -82,24 +82,22 @@ struct WalletView: View {
     
     var body: some View {
         List {
-            ForEach(self.model.wallets, id: \.self) { walletName in
-                Button(action: { showOpenWalletPromptUI = true }) {
-                    Text("\(walletName)")
-                }
-                .openWalletPromptUI(
-                    isPresented:$showOpenWalletPromptUI,
-                    TextAlert(title:"Open wallet", action:{ walletKey in self.model.openWallet(name:walletName, key:walletKey!)})
-                )
+            Button(action: { self.model.resetWallet() }) {
+                Text("Reset Wallet")
             }
-            Button(action: { showCreateWalletPromptUI = true }) {
-                Text("Create Wallet")
-            }.createWalletPromptUI(
-                isPresented: $showCreateWalletPromptUI,
-                TextAlert(title:"Create wallet", action:{
-                    walletName in
-                    self.model.createWallet(name:walletName!,key:"1234")
-                    self.model.openWallet(name:walletName!, key:"1234")
-                }))
+            if self.model.walletExists {
+                if self.model.walletOpened {
+                    Text("Wallet Opened")
+                } else {
+                    Button(action: { self.model.openWallet() }) {
+                        Text("Open Wallet")
+                    }
+                }
+            } else {
+                Button(action: { self.model.createWallet() }) {
+                    Text("Create Wallet")
+                }
+            }
         }
     }
 }

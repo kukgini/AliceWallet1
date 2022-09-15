@@ -15,26 +15,31 @@ class VcxAdaptor {
         VcxLogger.setDefault(nil)
         print("create ConnectMeVcx instance.")
         self.vcx = ConnectMeVcx()
-        let config = JSON(VcxAdaptor.config).string!
+        let config = JSON(VcxAdaptor.config).rawString([.encoding:String.Encoding.utf8])!
         _ = self.vcxInitThreadpool(config:config)
     }
 
-    func getWallets() -> [URL] {
+    func getWallets() -> [URL]? {
         let f = FileManager.default
         var url = f.urls(for:.documentDirectory, in:.userDomainMask)[0]
         url.appendPathComponent(VcxAdaptor.walletPath)
-        if !FileManager.default.fileExists(atPath: url.path) {
+        if !f.fileExists(atPath: url.path) {
             do {
-                try FileManager.default.createDirectory(atPath: url.path, withIntermediateDirectories: true, attributes: nil)
+                try f.createDirectory(atPath: url.path, withIntermediateDirectories: true, attributes: nil)
             } catch {
                 print(error.localizedDescription)
             }
         }
-        var result = try? f.contentsOfDirectory(at: url, includingPropertiesForKeys: nil);
-        if result == nil {
-            result = [URL]()
+        return try? f.contentsOfDirectory(at: url, includingPropertiesForKeys: nil);
+    }
+    
+    func resetWallet() {
+        let f = FileManager.default
+        if let wallets = self.getWallets() {
+            for wallet in wallets {
+                try? f.removeItem(at: wallet)
+            }
         }
-        return result!;
     }
     
     func createWallet(config:String, completion:((Error?) -> Void)?) {

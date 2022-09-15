@@ -101,8 +101,9 @@ public enum CredentialStatus: NSNumber {
 class VcxModel : ObservableObject {
 
     let vcx: VcxAdaptor
+    let walletId = "MyWallet"
+    let walletKey = "MySecretPassword"
     
-    @Published var wallets: [String] = []
     @Published var networks: [URL] = []
     
     @Published var walletKeyDerivationFunction = "ARGON2I_MOD"
@@ -129,10 +130,11 @@ class VcxModel : ObservableObject {
     
     init() {
         self.vcx = VcxAdaptor()
-        self.getWallets()
+        self.checkWalletExists()
         self.loadNetworks()
     }
     
+    @Published var walletExists = false
     @Published var walletOpened = false
     @Published var poolOpened = false
     @Published var agencyProvisioned = false
@@ -142,56 +144,56 @@ class VcxModel : ObservableObject {
         return walletOpened && poolOpened && agencyProvisioned && agencyClientCreated
     }
     
-    func getWallets() -> [String] {
-        let urls = self.vcx.getWallets()
-        self.wallets = []
-        print("wallets:")
-        for (index, url) in urls.enumerated() {
-            let walletName = url.lastPathComponent
-            print("\t* [\(index)] \(walletName)")
-            self.wallets.append(walletName)
+    func checkWalletExists() {
+        if let urls = vcx.getWallets() {
+            for url in urls {
+                let name = url.lastPathComponent
+                if name == walletId { walletExists = true }
+            }
         }
-        return self.wallets
     }
     
-    func createWallet(name:String,key:String) {
-        let config = """
-        {
-            "wallet_name": "\(name)",
-            "wallet_key": "\(key)",
-            "wallet_key_derivation": "\(self.walletKeyDerivationFunction)"
-        }
-        """
+    func resetWallet() {
+        self.vcx.resetWallet()
+        self.checkWalletExists()
+    }
+    
+    func createWallet() {
+        let config = JSON([
+            "wallet_name": walletId,
+            "wallet_key": walletKey,
+            "wallet_key_derivation": self.walletKeyDerivationFunction
+        ]).rawString([.encoding:String.Encoding.utf8])!
         print("create wallet. config=", config)
         self.vcx.createWallet(config:config, completion:{ error in
             if error != nil && error!._code > 0 {
                 print("create wallet failed: ", error!.localizedDescription)
             } else {
                 print("create wallet success.")
-                _ = self.getWallets()
+                self.checkWalletExists()
             }
         })
     }
     
-    func openWallet(name:String,key:String) {
+    func openWallet() {
         let context = LAContext()
-        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason:"인증이 필요합니다.") {
+        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason:"지갑을 열겠습니다.") {
             [weak self] (res, err) in
             DispatchQueue.main.async {
-                print("logged in.")
+                print("confirmed you are you.")
             }
         }
         let config = JSON([
-            "wallet_name": name,
-            "wallet_key": key,
+            "wallet_name": walletId,
+            "wallet_key": walletKey,
             "wallet_key_derivation": self.walletKeyDerivationFunction
-        ]).string!
+        ]).rawString([.encoding:String.Encoding.utf8])!
         print("open wallet. config=", config)
         self.vcx.openMainWallet(config:config, completion:{ error, handle in
             if error != nil && error!._code > 0 {
-                print("open wallet failed. handle=\(handle!), error=\(error!.localizedDescription)")
+                print("open wallet failed. handle=\(handle), error=\(error!.localizedDescription)")
             } else {
-                print("open wallet success. handle=\(handle!)")
+                print("open wallet success. handle=\(handle)")
                 self.walletOpened = true
             }
         })
