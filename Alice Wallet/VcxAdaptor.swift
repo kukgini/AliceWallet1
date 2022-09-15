@@ -6,6 +6,7 @@ import vcx
 class VcxAdaptor {
     
     static let config = ["num_thread":0]
+    static let walletPath = ".indy_client/wallet"
     
     let vcx: ConnectMeVcx?
     
@@ -14,14 +15,14 @@ class VcxAdaptor {
         VcxLogger.setDefault(nil)
         print("create ConnectMeVcx instance.")
         self.vcx = ConnectMeVcx()
-        let config = JSON(VcxAdaptor.config)
-        _ = self.vcxInitThreadpool(config:config.string!)
+        let config = JSON(VcxAdaptor.config).string!
+        _ = self.vcxInitThreadpool(config:config)
     }
 
     func listWalletURLs() -> [URL] {
         let fileManager = FileManager.default
         var url = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        url.appendPathComponent(".indy_client/wallet")
+        url.appendPathComponent(VcxAdaptor.walletPath)
         if !FileManager.default.fileExists(atPath: url.path) {
             do {
                 try FileManager.default.createDirectory(atPath: url.path, withIntermediateDirectories: true, attributes: nil)
