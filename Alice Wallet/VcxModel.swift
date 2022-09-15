@@ -129,7 +129,7 @@ class VcxModel : ObservableObject {
     
     init() {
         self.vcx = VcxAdaptor()
-        self.loadWallets()
+        self.getWallets()
         self.loadNetworks()
     }
     
@@ -142,8 +142,8 @@ class VcxModel : ObservableObject {
         return walletOpened && poolOpened && agencyProvisioned && agencyClientCreated
     }
     
-    func loadWallets() {
-        let urls = self.vcx.listWalletURLs()
+    func getWallets() -> [String] {
+        let urls = self.vcx.getWallets()
         self.wallets = []
         print("wallets:")
         for (index, url) in urls.enumerated() {
@@ -151,6 +151,7 @@ class VcxModel : ObservableObject {
             print("\t* [\(index)] \(walletName)")
             self.wallets.append(walletName)
         }
+        return self.wallets
     }
     
     func createWallet(name:String,key:String) {
@@ -167,7 +168,7 @@ class VcxModel : ObservableObject {
                 print("create wallet failed: ", error!.localizedDescription)
             } else {
                 print("create wallet success.")
-                self.loadWallets()
+                _ = self.getWallets()
             }
         })
     }
@@ -180,13 +181,11 @@ class VcxModel : ObservableObject {
                 print("logged in.")
             }
         }
-        let config = """
-        {
-            "wallet_name": "\(name)",
-            "wallet_key": "\(key)",
-            "wallet_key_derivation": "\(self.walletKeyDerivationFunction)"
-        }
-        """
+        let config = JSON([
+            "wallet_name": name,
+            "wallet_key": key,
+            "wallet_key_derivation": self.walletKeyDerivationFunction
+        ]).string!
         print("open wallet. config=", config)
         self.vcx.openMainWallet(config:config, completion:{ error, handle in
             if error != nil && error!._code > 0 {

@@ -19,9 +19,9 @@ class VcxAdaptor {
         _ = self.vcxInitThreadpool(config:config)
     }
 
-    func listWalletURLs() -> [URL] {
-        let fileManager = FileManager.default
-        var url = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    func getWallets() -> [URL] {
+        let f = FileManager.default
+        var url = f.urls(for:.documentDirectory, in:.userDomainMask)[0]
         url.appendPathComponent(VcxAdaptor.walletPath)
         if !FileManager.default.fileExists(atPath: url.path) {
             do {
@@ -30,7 +30,7 @@ class VcxAdaptor {
                 print(error.localizedDescription)
             }
         }
-        var result = try? fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil);
+        var result = try? f.contentsOfDirectory(at: url, includingPropertiesForKeys: nil);
         if result == nil {
             result = [URL]()
         }
