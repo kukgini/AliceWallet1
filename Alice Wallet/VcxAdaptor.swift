@@ -8,7 +8,7 @@ class VcxAdaptor {
     static let config = ["num_thread":0]
     static let walletPath = ".indy_client/wallet"
     
-    let vcx: ConnectMeVcx?
+    let vcx: ConnectMeVcx
     
     init () {
         print("inititialize VcxLogger.")
@@ -38,7 +38,7 @@ class VcxAdaptor {
     }
     
     func createWallet(config:String, completion:((Error?) -> Void)?) {
-        self.vcx!.createWallet(config, completion:completion)
+        self.vcx.createWallet(config, completion:completion)
     }
     
     func listNetworkTxURLs() -> [URL] {
@@ -46,83 +46,83 @@ class VcxAdaptor {
     }
     
     func openMainWallet(config:String, completion:((Error?,NSNumber?) -> Void)?) {
-        self.vcx!.openMainWallet(config, completion:completion)
+        self.vcx.openMainWallet(config, completion:completion)
     }
 
     func vcxInitThreadpool(config:String) -> Int {
         print("init threadpool=", config)
-        return Int(self.vcx!.vcxInitThreadpool(config))
+        return Int(self.vcx.vcxInitThreadpool(config))
     }
 
     func vcxOpenMainPool(config:String, completion:((Error?) -> Void)?) {
-        self.vcx!.vcxOpenMainPool(config, completion:completion)
+        self.vcx.vcxOpenMainPool(config, completion:completion)
     }
     
     func vcxProvisionCloudAgent(config:String, completion:((Error?,String?) -> Void)?) {
-        self.vcx!.vcxProvisionCloudAgent(config, completion:completion)
+        self.vcx.vcxProvisionCloudAgent(config, completion:completion)
     }
     
     func vcxCreateAgencyClient(forMainWallet:String!, completion:((Error?) -> Void)?) {
-        self.vcx!.vcxCreateAgencyClient(forMainWallet:forMainWallet, completion:completion)
+        self.vcx.vcxCreateAgencyClient(forMainWallet:forMainWallet, completion:completion)
     }
     
     func connectionCreate(withInvite:String!, inviteDetails:String!, completion:((Error?,NSNumber?) -> Void)?) {
-        self.vcx!.connectionCreate(withInvite:withInvite, inviteDetails:inviteDetails, completion:completion)
+        self.vcx.connectionCreate(withInvite:withInvite, inviteDetails:inviteDetails, completion:completion)
     }
     
     func connectionConnect(withHandle:NSNumber!, connectionType:String!, completion:((Error?) -> Void)?) {
-        self.vcx!.connectionConnect(withHandle, connectionType:connectionType, completion:completion)
+        self.vcx.connectionConnect(withHandle, connectionType:connectionType, completion:completion)
     }
     
     func connectionGetState(withHandle:NSNumber!, completion:((Error?,NSNumber?) -> Void)?) {
-        self.vcx!.connectionGetState(withHandle, completion:completion)
+        self.vcx.connectionGetState(withHandle, completion:completion)
     }
     
     func connectionUpdateState(withHandle:NSNumber!, completion:((Error?,NSNumber?) -> Void)?) {
-        self.vcx!.connectionUpdateState(withHandle, completion:completion)
+        self.vcx.connectionUpdateState(withHandle, completion:completion)
     }
     
     func connectionSerialize(withHandle:NSNumber!, completion:((Error?,String?) -> Void)?) {
-        self.vcx!.connectionSerialize(withHandle, completion:completion)
+        self.vcx.connectionSerialize(withHandle, completion:completion)
     }
     
     func connectionDeserialize(serializedConnection:String!, completion:((Error?,NSNumber?) -> Void)?) {
-        self.vcx!.connectionDeserialize(serializedConnection, completion:completion)
+        self.vcx.connectionDeserialize(serializedConnection, completion:completion)
     }
     
     func connectionRelease(withHandle:NSNumber!) {
-        self.vcx!.connectionRelease(withHandle)
+        self.vcx.connectionRelease(withHandle)
     }
     
     func connectionGetPwDid(withHandle:NSNumber!, completion:((Error?,String?) -> Void)?) {
-        self.vcx!.connectionGetPwDid(withHandle, completion:completion)
+        self.vcx.connectionGetPwDid(withHandle, completion:completion)
     }
     
     func connectionGetTheirPwDid(withHandle:NSNumber!, completion:((Error?,String?) -> Void)?) {
-        self.vcx!.connectionGetTheirPwDid(withHandle, completion:completion)
+        self.vcx.connectionGetTheirPwDid(withHandle, completion:completion)
     }
     
     func connectionSendBasicMessage(withHandle:NSNumber!, message:String!, options:String!, completion:((Error?,String?) -> Void)?) {
-        self.vcx!.connectionSendMessage(withHandle, withMessage:message, withSendMessageOptions:options, withCompletion:completion)
+        self.vcx.connectionSendMessage(withHandle, withMessage:message, withSendMessageOptions:options, withCompletion:completion)
     }
     
     func credentialGetOffers(withHandle:NSNumber!, completion:((Error?,String?) -> Void)?) {
-        self.vcx!.credentialGetOffers(withHandle, completion:completion)
+        self.vcx.credentialGetOffers(withHandle, completion:completion)
     }
     
     func credentialCreateWithOffer(sourceId:String, offer:String, completion:((Error?,NSNumber?) -> Void)?) {
-        self.vcx!.credentialCreate(withOffer:sourceId, offer:offer, completion:completion)
+        self.vcx.credentialCreate(withOffer:sourceId, offer:offer, completion:completion)
     }
     
     func credentialSendRequest(credentialHandle:NSNumber!, connectionHandle:NSNumber!, completion:((Error?) -> Void)?) {
-        self.vcx!.credentialSendRequest(credentialHandle, connectionHandle:connectionHandle, paymentHandle:0, completion:completion);
+        self.vcx.credentialSendRequest(credentialHandle, connectionHandle:connectionHandle, paymentHandle:0, completion:completion);
     }
     
     func credentialUpdateStateV2(credentialHandle:NSNumber!, connectionHandle:NSNumber!, completion:((Error?,NSNumber?) -> Void)?) {
-        self.vcx!.credentialUpdateStateV2(credentialHandle, connectionHandle:connectionHandle, completion:completion)
+        self.vcx.credentialUpdateStateV2(credentialHandle, connectionHandle:connectionHandle, completion:completion)
     }
     
     func getCredential(credentialHandle:NSNumber!, completion:((Error?,String?) -> Void)?) {
-        self.vcx!.getCredential(credentialHandle, completion:completion)
+        self.vcx.getCredential(credentialHandle, completion:completion)
     }
 }
