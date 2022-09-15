@@ -1,4 +1,5 @@
 import Foundation
+import LocalAuthentication
 import SwiftyJSON
 import vcx
 import SwiftUI
@@ -166,11 +167,19 @@ class VcxModel : ObservableObject {
                 print("create wallet failed: ", error!.localizedDescription)
             } else {
                 print("create wallet success.")
+                self.loadWallets()
             }
         })
     }
     
     func openWallet(name:String,key:String) {
+        let context = LAContext()
+        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason:"인증이 필요합니다.") {
+            [weak self] (res, err) in
+            DispatchQueue.main.async {
+                print("logged in.")
+            }
+        }
         let config = """
         {
             "wallet_name": "\(name)",
