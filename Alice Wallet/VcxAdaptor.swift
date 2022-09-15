@@ -25,7 +25,18 @@ class VcxAdaptor {
         let fileManager = FileManager.default
         var url = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         url.appendPathComponent(".indy_client/wallet")
-        return try! fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+        if !FileManager.default.fileExists(atPath: url.path) {
+            do {
+                try FileManager.default.createDirectory(atPath: url.path, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        var result = try? fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil);
+        if result == nil {
+            result = [URL]()
+        }
+        return result!;
     }
     
     func createWallet(config:String, completion:((Error?) -> Void)?) {
