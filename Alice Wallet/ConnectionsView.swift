@@ -13,10 +13,15 @@ struct ConnectionsView: View {
         VStack {
             ScrollView() {
                 Group {
-                    scanQrCodeButton()
+                    HStack{
+                        scanQrCodeButton()
+                    }
                     invitationSettings()
-                    receiveInvitationButton()
-                    updateStatusButton()
+                    HStack{
+                        receiveInvitationButton()
+                        updateStatusButton()
+                    }
+
                     connectionItemList()
                     messageEditor()
                 }
@@ -52,7 +57,7 @@ struct ConnectionsView: View {
             self.invitationSettingsIsFocused = false
             model.receiveInvitation()
         }) {
-            Image(systemName:"qrcode.viewfinder")
+            Image(systemName:"arrow.down.to.line")
         }.buttonStyle(.bordered)
     }
     
