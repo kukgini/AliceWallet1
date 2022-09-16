@@ -5,6 +5,14 @@ import vcx
 import SwiftUI
 import Alamofire
 
+extension Dictionary {
+    mutating func merge(dict: [Key: Value]){
+        for (k, v) in dict {
+            updateValue(v, forKey: k)
+        }
+    }
+}
+
 public enum ConnectionStatus: NSNumber {
     case initialized = 1
     case request_sent = 2
@@ -111,15 +119,12 @@ class VcxModel : ObservableObject {
     @Published var ledgerGenesisURL = "http://test.bcovrin.vonx.io/genesis"
     @Published var genesisTransaction = UserDefaults.standard.string(forKey:"GenesisTransaction") ??  ""
     
-    @Published var agencyEndpoint = "https://ariesvcx.agency.staging.absa.id"
-    @Published var agencyDid = "VsKV7grR1BUE29mG2Fm2kX"
-    @Published var agencyVerkey = "Hezce2UWMZ3wUhVkh2LfKSs8nDzWwzs2Win7EzNN3YaR"
-
-    // pairwise DID of this client's agent in the agency.
-    @Published var remoteToSdkDid: String = UserDefaults.standard.string(forKey: "remoteToSdkDid") ?? ""
-    @Published var remoteToSdkVerkey: String = UserDefaults.standard.string(forKey: "remoteToSdkVerkey") ?? ""
-    @Published var sdkToRemoteDid: String = UserDefaults.standard.string(forKey: "sdkToRemoteDid") ?? ""
-    @Published var sdkToRemoteVerkey: String = UserDefaults.standard.string(forKey: "sdkToRemoteVerkey") ?? ""
+    let agencyConfig = JSON([
+        "agency_endpoint": "https://ariesvcx.agency.staging.absa.id",
+        "agency_did": "VsKV7grR1BUE29mG2Fm2kX",
+        "agency_verkey": "Hezce2UWMZ3wUhVkh2LfKSs8nDzWwzs2Win7EzNN3YaR"
+    ])
+    var agencyClientConfig: JSON?
     
     @Published var inviteDetails = ""
     @Published var connections: [String:(
@@ -139,6 +144,10 @@ class VcxModel : ObservableObject {
         self.vcx = VcxAdaptor()
         self.checkWalletExists()
         self.loadNetworks()
+        self.agencyClientConfig = JSON(UserDefaults.standard.string(forKey:"agencyClientConfig"))
+        if self.agencyClientConfig != nil {
+            agencyProvisioned = false
+        }
     }
     
     @Published var walletExists = false
@@ -148,7 +157,7 @@ class VcxModel : ObservableObject {
     @Published var agencyClientCreated = false
     
     func onboardingCompleted() -> Bool {
-        return walletOpened && poolOpened && agencyClientCreated
+        return walletOpened && poolOpened && agencyProvisioned && agencyClientCreated
     }
     
     func checkWalletExists() {
@@ -225,49 +234,25 @@ class VcxModel : ObservableObject {
     }
 
     func provisionCloudAgent() {
-        let config = """
-        {
-            "agency_endpoint": "\(agencyEndpoint)",
-            "agency_did": "\(agencyDid)",
-            "agency_verkey": "\(agencyVerkey)"
-        }
-        """
-        print("provision cloud agent. config=", config)
-        self.vcx.vcxProvisionCloudAgent(config: config, completion: { error, result in
+        print("provision cloud agent. config=\(self.agencyConfig)")
+        self.vcx.vcxProvisionCloudAgent(config: self.agencyConfig.rawString()!, completion: { error, result in
             if error != nil && error!._code > 0 {
                 print("provision cloud agent failed. error=", error!.localizedDescription)
             } else {
                 print("provision cloud agent successed.")
-                let json = try! JSON(data: result!.data(using: .utf8)!)
-                self.remoteToSdkDid    = json["remote_to_sdk_did"].string!
-                self.remoteToSdkVerkey = json["remote_to_sdk_verkey"].string!
-                self.sdkToRemoteDid    = json["sdk_to_remote_did"].string!
-                self.sdkToRemoteVerkey = json["sdk_to_remote_verkey"].string!
-                print("json=\(json)")
+                var newAgencyClientConfig = try! JSON(data: result!.data(using: .utf8)!)
+                try! newAgencyClientConfig.merge(with: self.agencyConfig)
+                print("agency client=\(newAgencyClientConfig)")
                 
-                UserDefaults.standard.set(self.remoteToSdkDid,    forKey: "remoteToSdkDid")
-                UserDefaults.standard.set(self.remoteToSdkVerkey, forKey: "remoteToSdkVerkey")
-                UserDefaults.standard.set(self.sdkToRemoteDid,    forKey: "sdkToRemoteDid")
-                UserDefaults.standard.set(self.sdkToRemoteVerkey, forKey: "sdkToRemoteVerkey")
-                
+                UserDefaults.standard.set(newAgencyClientConfig.rawString(), forKey: "agencyClientConfig")
                 self.agencyProvisioned = true
             }
         })
     }
     
     func createAgencyClientForMainWallet() {
-        let config = """
-        {
-            "agency_endpoint": "\(agencyEndpoint)",
-            "agency_did": "\(agencyDid)",
-            "agency_verkey": "\(agencyVerkey)",
-            "remote_to_sdk_did": "\(remoteToSdkDid)",
-            "remote_to_sdk_verkey": "\(remoteToSdkVerkey)",
-            "sdk_to_remote_did": "\(sdkToRemoteDid)",
-            "sdk_to_remote_verkey": "\(sdkToRemoteVerkey)"
-        }
-        """
-        self.vcx.vcxCreateAgencyClient(forMainWallet: config, completion: { error in
+        print("create agency client for main wallet. config=\(self.agencyClientConfig)")
+        self.vcx.vcxCreateAgencyClient(forMainWallet: self.agencyClientConfig!.rawString(), completion: { error in
             if error != nil && error!._code > 0 {
                 print("provision cloud agent failed. error=", error!.localizedDescription)
             } else {
