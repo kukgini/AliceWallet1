@@ -5,24 +5,26 @@ import vcx
 
 class VcxAdaptor {
     
-    static let config = ["num_thread":0]
-    static let walletPath = ".indy_client/wallet"
+    static let THREADPOOL_CONFIG = ["num_thread":0]
+    static let WALLET_ROOT = ".indy_client/wallet"
     
     let vcx: ConnectMeVcx
     
     init () {
         print("inititialize VcxLogger.")
-        VcxLogger.setDefault(nil)
+        VcxLogger.setDefault("env_logger")
+        
         print("create ConnectMeVcx instance.")
-        self.vcx = ConnectMeVcx()
-        let config = JSON(VcxAdaptor.config).rawString([.encoding:String.Encoding.utf8])!
-        _ = self.vcxInitThreadpool(config:config)
+        let c = JSON(VcxAdaptor.THREADPOOL_CONFIG).rawString([.encoding:String.Encoding.utf8])!
+        let vcx = ConnectMeVcx()
+        _ = vcx.vcxInitThreadpool(c)
+        self.vcx = vcx
     }
-
+    
     func getWallets() -> [URL]? {
         let f = FileManager.default
         var url = f.urls(for:.documentDirectory, in:.userDomainMask)[0]
-        url.appendPathComponent(VcxAdaptor.walletPath)
+        url.appendPathComponent(VcxAdaptor.WALLET_ROOT)
         if !f.fileExists(atPath: url.path) {
             do {
                 try f.createDirectory(atPath: url.path, withIntermediateDirectories: true, attributes: nil)
@@ -33,7 +35,7 @@ class VcxAdaptor {
         return try? f.contentsOfDirectory(at: url, includingPropertiesForKeys: nil);
     }
     
-    func resetWallet() {
+    func removeAllWallets() {
         let f = FileManager.default
         if let wallets = self.getWallets() {
             for wallet in wallets {

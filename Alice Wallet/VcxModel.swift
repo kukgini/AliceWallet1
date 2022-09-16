@@ -161,7 +161,8 @@ class VcxModel : ObservableObject {
     }
     
     func resetWallet() {
-        self.vcx.resetWallet()
+        self.vcx.removeAllWallets()
+        self.createWallet()
         self.checkWalletExists()
     }
     
@@ -172,7 +173,6 @@ class VcxModel : ObservableObject {
                 print("create wallet failed: ", error!.localizedDescription)
             } else {
                 print("create wallet success.")
-                self.checkWalletExists()
             }
         })
     }

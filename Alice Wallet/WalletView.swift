@@ -22,7 +22,7 @@ struct WalletView: View {
                     }
                 }
             } else {
-                Button(action: { self.model.createWallet() }) {
+                Button(action: { self.model.resetWallet() }) {
                     Image(systemName:"qrcode.viewfinder")
                     Text("Create Wallet")
                 }
