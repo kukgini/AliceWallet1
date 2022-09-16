@@ -7,27 +7,24 @@ struct LedgerView: View {
     @State private var showingAlert = false
     
     var body: some View {
-        //VStack {
-            Group {
-                List {
-                    ForEach(self.model.networks, id: \.self) { txURL in
-                        let txName = txURL.deletingPathExtension().lastPathComponent
-                        Button(action: { showingAlert = true }) {
-                            Text("\(txName)")
+        VStack {
+            ForEach(self.model.networks, id: \.self) { url in
+                let genesisPath = url.deletingPathExtension().lastPathComponent
+                HStack {
+                    if self.model.poolOpened {
+                        Image(systemName:"lock.open")
+                        Button(action: { self.model.openMainPool(name: genesisPath) }) {
+                            Text("Opened \(genesisPath)")
                         }
-                        .alert(isPresented: $showingAlert) {
-                            Alert(
-                                title: Text("Open pool"),
-                                message: Text("open pool \(txName)"),
-                                primaryButton: .destructive(Text("Open"), action: {
-                                    model.openMainPool(name: txName)
-                                }),
-                                secondaryButton: .cancel())
+                    } else {
+                        Image(systemName:"lock")
+                        Button(action: { self.model.openMainPool(name: genesisPath) }) {
+                            Text("Open \(genesisPath)")
                         }
                     }
                 }
             }
-        //}
+        }
     }
 }
 
