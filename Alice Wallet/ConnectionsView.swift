@@ -21,7 +21,7 @@ struct ConnectionsView: View {
         }
     }
     
-    fileprivate func invitationSettings() -> some View {
+    func invitationSettings() -> some View {
         return Group {
             TextEditor(text: $model.inviteDetails)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: 200)
@@ -31,7 +31,7 @@ struct ConnectionsView: View {
         }
     }
     
-    fileprivate func receiveInvitationButton() -> some View {
+    func receiveInvitationButton() -> some View {
         return Button(action: {
             self.invitationSettingsIsFocused = false
             model.receiveInvitation()
@@ -40,13 +40,13 @@ struct ConnectionsView: View {
         }.buttonStyle(.bordered)
     }
     
-    fileprivate func updateStatusButton() -> some View {
+    func updateStatusButton() -> some View {
         return Button(action: model.connectionStatusUpdate) {
             Image(systemName:"arrow.2.circlepath.circle.fill")
         }.buttonStyle(.bordered)
     }
     
-    fileprivate func connectionItemList() -> some View {
+    func connectionItemList() -> some View {
         return VStack {
             ForEach(Array(self.model.connections.keys), id: \.self) { id in
                 connectionItemView(id:id)
@@ -54,7 +54,7 @@ struct ConnectionsView: View {
         }
     }
     
-    fileprivate func connectionItemView(id:String) -> some View {
+    func connectionItemView(id:String) -> some View {
         return HStack {
             let c = self.model.connections[id]!
             let color: Color = c.status.color()
@@ -85,7 +85,7 @@ struct ConnectionsView: View {
         }
     }
     
-    fileprivate func messageEditor() -> some View {
+    func messageEditor() -> some View {
         return Group {
             TextEditor(text: $model.message)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: 200)
