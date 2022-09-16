@@ -145,8 +145,8 @@ class VcxModel : ObservableObject {
         self.checkWalletExists()
         self.loadNetworks()
         self.agencyClientConfig = JSON(UserDefaults.standard.string(forKey:"agencyClientConfig"))
-        if self.agencyClientConfig != nil {
-            agencyProvisioned = false
+        if let _ = self.agencyClientConfig {
+            agencyProvisioned = true
         }
     }
     
