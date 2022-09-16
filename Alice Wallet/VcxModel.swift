@@ -256,7 +256,7 @@ class VcxModel : ObservableObject {
     }
     
     func receiveInvitation() {
-        // url encoded invitation 형식일 경우 ?c_i= 이후의 값을 base64 인코딩 하면 json invitation 이 나옴
+        // url encoded invitation 형식일 경우 ?c_i= 이후의 값을 base64 인코딩 하면 json invitation 이 나옴        
         let json = try! JSON(data: inviteDetails.data(using: .utf8)!)
         let id = json["@id"].string!
         print("receive invitation. id=\(id), detail=\(inviteDetails)")

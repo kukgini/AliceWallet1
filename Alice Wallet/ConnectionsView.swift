@@ -115,8 +115,18 @@ struct ConnectionsView: View {
         isShowingScanner = false
         switch result {
         case .success(let result):
-            let details = result.string
+            var details = result.string
             print("scanning done: \(details)")
+            if details.starts(with: "http") {
+                let url = URLComponents(string:details)
+                let items = url?.queryItems ?? []
+                for item in items {
+                    if item.name == "c_i" {
+                        let ci = item.value ?? ""
+                        details = String(data:Data(base64Encoded:ci)!, encoding:.utf8) ?? ""
+                    }
+                }
+            }
             model.inviteDetails = details
         case .failure(let error):
             print("scanning failed: \(error.localizedDescription)")
