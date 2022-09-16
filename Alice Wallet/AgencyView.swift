@@ -18,19 +18,19 @@ struct AgencyView: View {
         }
     }
     
-    fileprivate func provisionCloudAgentButton() -> some View {
+    func provisionCloudAgentButton() -> some View {
         return Button(action: model.provisionCloudAgent) {
             Text("Provision Cloud Agent")
         }.buttonStyle(.bordered)
     }
     
-    fileprivate func createAgencyClientForMainWalletButton() -> some View {
+    func createAgencyClientForMainWalletButton() -> some View {
         return Button(action: model.createAgencyClientForMainWallet) {
             Text("Create Agency Client")
         }.buttonStyle(.bordered)
     }
 
-    fileprivate func agencyServerSettings() -> some View {
+    func agencyServerSettings() -> some View {
         return Group {
             TextField("Agency Endpoint", text: $model.agencyEndpoint).textFieldStyle(.roundedBorder)
             TextField("Agency DID", text: $model.agencyDid).textFieldStyle(.roundedBorder)
@@ -38,7 +38,7 @@ struct AgencyView: View {
         }
     }
     
-    fileprivate func agencyClientSettings() -> some View {
+    func agencyClientSettings() -> some View {
         return Group {
             TextField("Remote To SDK DID", text: $model.remoteToSdkDid).textFieldStyle(.roundedBorder)
             TextField("Remote To SDK VerKey", text: $model.remoteToSdkVerkey).textFieldStyle(.roundedBorder)
