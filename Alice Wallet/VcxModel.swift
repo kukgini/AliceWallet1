@@ -387,7 +387,7 @@ class VcxModel : ObservableObject {
                 withHandle:c.handle,
                 completion:{error, offers in
                     if error != nil && error!._code > 0 {
-                        print("get credential offers for connection id=\(id) failed. error=", error!.localizedDescription)
+                        print("get credential offers for connection id=\(id) failed. error=\(error!.localizedDescription). offers=\(offers)")
                     } else {
                         print("get credential offers for connection id=\(id) successed.")
                         let offer = offers?.dropFirst().dropLast()
