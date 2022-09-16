@@ -12,7 +12,7 @@ class VcxAdaptor {
     
     init () {
         print("inititialize VcxLogger.")
-        VcxLogger.setDefault("env_logger")
+        VcxLogger.setDefault(nil)
         
         print("create ConnectMeVcx instance.")
         let c = JSON(VcxAdaptor.THREADPOOL_CONFIG).rawString([.encoding:String.Encoding.utf8])!
