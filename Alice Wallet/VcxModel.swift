@@ -97,6 +97,28 @@ public enum CredentialStatus: NSNumber {
     }
 }
 
+class Invitation {
+    private var _code: String = ""
+    var code: String {
+        get {
+            return _code
+        }
+        set {
+            // url encoded invitation 형식일 경우 ?c_i= 이후의 값을 base64 인코딩 하면 json invitation 이 나옴
+            if newValue.starts(with: "http") {
+                let url = URLComponents(string:newValue)
+                let items = url?.queryItems ?? []
+                for item in items {
+                    if item.name == "c_i" {
+                        let ci = item.value ?? ""
+                        _code = String(data:Data(base64Encoded:ci)!, encoding:.utf8) ?? ""
+                    }
+                }
+            }
+        }
+    }
+}
+
 class VcxModel : ObservableObject {
 
     static let walletId = "MyWallet"
@@ -115,7 +137,7 @@ class VcxModel : ObservableObject {
     ])
     var agencyClientConfig: JSON?
     
-    @Published var inviteDetails = ""
+    @Published var invitation: Invitation = Invitation()
     @Published var connections: [String:(
         handle:NSNumber,
         status:ConnectionStatus,
@@ -243,9 +265,9 @@ class VcxModel : ObservableObject {
         print("create agency client for main wallet. config=\(self.agencyClientConfig)")
         self.vcx.vcxCreateAgencyClient(forMainWallet: self.agencyClientConfig!.rawString(), completion: { error in
             if error != nil && error!._code > 0 {
-                print("provision cloud agent failed. error=", error!.localizedDescription)
+                print("create agency client failed. error=", error!.localizedDescription)
             } else {
-                print("provision cloud agent successed.")
+                print("create agency client successed.")
                 self.agencyClientCreated = true
             }
         })
@@ -256,10 +278,10 @@ class VcxModel : ObservableObject {
     }
     
     func receiveInvitation() {
-        // url encoded invitation 형식일 경우 ?c_i= 이후의 값을 base64 인코딩 하면 json invitation 이 나옴        
-        let json = try! JSON(data: inviteDetails.data(using: .utf8)!)
+             
+        let json = try! JSON(data: self.invitation.code.data(using: .utf8)!)
         let id = json["@id"].string!
-        print("receive invitation. id=\(id), detail=\(inviteDetails)")
+        print("receive invitation. id=\(id), detail=\(self.invitation.code)")
         self.connectionCreate(id:id,invitateDetails:json)
     }
     
@@ -281,10 +303,10 @@ class VcxModel : ObservableObject {
     }
     
     func connectionCreate(id:String,invitateDetails:JSON) {
-        print("connection create. id=\(id), inviteDetails=\(invitateDetails)")
+        print("connection create. id=\(id), invitation=\(invitateDetails)")
         self.vcx.connectionCreate(
             withInvite: id,
-            inviteDetails: inviteDetails,
+            inviteDetails: self.invitation.code,
             completion: { error, handle in
                 if error != nil && error!._code > 0 {
                     print("connection create failed. error=", error!.localizedDescription)

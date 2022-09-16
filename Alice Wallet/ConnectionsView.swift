@@ -39,7 +39,7 @@ struct ConnectionsView: View {
     
     func invitationSettings() -> some View {
         return Group {
-            TextEditor(text: $model.inviteDetails)
+            TextEditor(text: $model.invitation.code)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: 200)
                 .border(Color.gray)
                 .textFieldStyle(.roundedBorder)
@@ -115,19 +115,9 @@ struct ConnectionsView: View {
         isShowingScanner = false
         switch result {
         case .success(let result):
-            var details = result.string
-            print("scanning done: \(details)")
-            if details.starts(with: "http") {
-                let url = URLComponents(string:details)
-                let items = url?.queryItems ?? []
-                for item in items {
-                    if item.name == "c_i" {
-                        let ci = item.value ?? ""
-                        details = String(data:Data(base64Encoded:ci)!, encoding:.utf8) ?? ""
-                    }
-                }
-            }
-            model.inviteDetails = details
+            let code = result.string
+            print("scanning done: \(code)")
+            model.invitation.code = code
         case .failure(let error):
             print("scanning failed: \(error.localizedDescription)")
         }
