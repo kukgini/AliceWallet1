@@ -5,14 +5,6 @@ import vcx
 import SwiftUI
 import Alamofire
 
-extension Dictionary {
-    mutating func merge(dict: [Key: Value]){
-        for (k, v) in dict {
-            updateValue(v, forKey: k)
-        }
-    }
-}
-
 public enum ConnectionStatus: NSNumber {
     case initialized = 1
     case request_sent = 2
