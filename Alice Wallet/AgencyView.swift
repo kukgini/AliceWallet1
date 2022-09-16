@@ -16,12 +16,14 @@ struct AgencyView: View {
     
     func provisionCloudAgentButton() -> some View {
         return Button(action: model.provisionCloudAgent) {
+            Image(systemName:"person.fill.questionmark")
             Text("Provision Cloud Agent")
         }.buttonStyle(.bordered)
     }
     
     func createAgencyClientForMainWalletButton() -> some View {
         return Button(action: model.createAgencyClientForMainWallet) {
+            Image(systemName:"shareplay.slash")
             Text("Create Agency Client")
         }.buttonStyle(.bordered)
     }
