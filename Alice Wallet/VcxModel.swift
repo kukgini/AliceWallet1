@@ -108,9 +108,6 @@ class VcxModel : ObservableObject {
     
     @Published var networks: [URL] = []
 
-    @Published var ledgerGenesisURL = "http://test.bcovrin.vonx.io/genesis"
-    @Published var genesisTransaction = UserDefaults.standard.string(forKey:"GenesisTransaction") ??  ""
-    
     let agencyConfig = JSON([
         "agency_endpoint": "https://ariesvcx.agency.staging.absa.id",
         "agency_did": "VsKV7grR1BUE29mG2Fm2kX",
