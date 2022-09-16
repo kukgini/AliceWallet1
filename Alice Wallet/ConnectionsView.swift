@@ -1,4 +1,5 @@
 import SwiftUI
+import CodeScanner_Rownd
 
 struct ConnectionsView: View {
     
@@ -6,10 +7,13 @@ struct ConnectionsView: View {
     @FocusState var invitationSettingsIsFocused: Bool
     @FocusState var messageEditorIsFocused: Bool
     
+    @State var isShowingScanner = false
+    
     var body: some View {
         VStack {
             ScrollView() {
                 Group {
+                    scanQrCodeButton()
                     invitationSettings()
                     receiveInvitationButton()
                     updateStatusButton()
@@ -18,7 +22,19 @@ struct ConnectionsView: View {
                 }
             }
             Spacer()
+        }.sheet(isPresented: $isShowingScanner) {
+            CodeScannerView(codeTypes: [.qr],
+                            simulatedData: "https://some.endpoint.url?c_i=Base64EncodedInvitationURL==",
+                            completion: self.handleQrCodeScan)
         }
+    }
+    
+    func scanQrCodeButton() -> some View {
+        return Button(action: {
+            isShowingScanner = true
+        }) {
+            Image(systemName:"qrcode.viewfinder")
+        }.buttonStyle(.bordered)
     }
     
     func invitationSettings() -> some View {
@@ -92,6 +108,18 @@ struct ConnectionsView: View {
                 .border(Color.gray)
                 .textFieldStyle(.roundedBorder)
                 .focused($messageEditorIsFocused)
+        }
+    }
+    
+    func handleQrCodeScan(result: Result<ScanResult, ScanError>) {
+        isShowingScanner = false
+        switch result {
+        case .success(let result):
+            let details = result.string
+            print("scanning done: \(details)")
+            model.inviteDetails = details
+        case .failure(let error):
+            print("scanning failed: \(error.localizedDescription)")
         }
     }
 }
