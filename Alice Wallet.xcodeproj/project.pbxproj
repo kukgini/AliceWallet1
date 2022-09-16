@@ -11,7 +11,7 @@
 		91617FF828D2FE5000A9E500 /* MockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91617FF728D2FE5000A9E500 /* MockModel.swift */; };
 		916219B92744C5350036888C /* VcxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916219B82744C5350036888C /* VcxModel.swift */; };
 		9165FFE32751CC38009C1B82 /* LedgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9165FFE22751CC38009C1B82 /* LedgerView.swift */; };
-		9180659F2824B67300F8A98B /* OnboardingFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9180659E2824B67300F8A98B /* OnboardingFlowView.swift */; };
+		9180659F2824B67300F8A98B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9180659E2824B67300F8A98B /* OnboardingView.swift */; };
 		919230402741F3B800A4D31D /* VcxAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9192303F2741F3B800A4D31D /* VcxAdaptor.swift */; };
 		91BC531828192BFE00F503B4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 91BC531628192BFE00F503B4 /* Model.xcdatamodeld */; };
 		91CF5075273F773700DFFCD7 /* Alice_WalletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CF5074273F773700DFFCD7 /* Alice_WalletApp.swift */; };
@@ -33,7 +33,7 @@
 		91617FF728D2FE5000A9E500 /* MockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModel.swift; sourceTree = "<group>"; };
 		916219B82744C5350036888C /* VcxModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VcxModel.swift; sourceTree = "<group>"; };
 		9165FFE22751CC38009C1B82 /* LedgerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LedgerView.swift; sourceTree = "<group>"; };
-		9180659E2824B67300F8A98B /* OnboardingFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowView.swift; sourceTree = "<group>"; };
+		9180659E2824B67300F8A98B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		9192303F2741F3B800A4D31D /* VcxAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VcxAdaptor.swift; sourceTree = "<group>"; };
 		91BC531728192BFE00F503B4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		91CF5071273F773700DFFCD7 /* Alice Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Alice Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,7 +102,7 @@
 				9165FFE22751CC38009C1B82 /* LedgerView.swift */,
 				91F70EB327560E760004CC90 /* CredentialView.swift */,
 				91BC531628192BFE00F503B4 /* Model.xcdatamodeld */,
-				9180659E2824B67300F8A98B /* OnboardingFlowView.swift */,
+				9180659E2824B67300F8A98B /* OnboardingView.swift */,
 				91617FF728D2FE5000A9E500 /* MockModel.swift */,
 			);
 			path = "Alice Wallet";
@@ -239,7 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9180659F2824B67300F8A98B /* OnboardingFlowView.swift in Sources */,
+				9180659F2824B67300F8A98B /* OnboardingView.swift in Sources */,
 				91CF5077273F773700DFFCD7 /* WalletView.swift in Sources */,
 				9165FFE32751CC38009C1B82 /* LedgerView.swift in Sources */,
 				91F70EB427560E760004CC90 /* CredentialView.swift in Sources */,

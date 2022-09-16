@@ -148,7 +148,7 @@ class VcxModel : ObservableObject {
     @Published var agencyClientCreated = false
     
     func onboardingCompleted() -> Bool {
-        return walletOpened && poolOpened && agencyProvisioned && agencyClientCreated
+        return walletOpened && poolOpened && agencyClientCreated
     }
     
     func checkWalletExists() {

@@ -3,14 +3,14 @@ import SwiftUI
 @main
 struct Alice_WalletApp: App {
     
-    let model: VcxModel = VcxModel()
+    @ObservedObject var model: VcxModel = VcxModel()
     
     var body: some Scene {
         WindowGroup {
-            if model.onboardingCompleted() {
+            if self.model.onboardingCompleted() {
                 ContentView().environmentObject(model)
             } else {
-                OnboardingFlowView().environmentObject(model)
+                OnboardingView().environmentObject(model)
             }
         }
     }
