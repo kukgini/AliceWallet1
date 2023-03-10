@@ -33,6 +33,6 @@ struct WalletView: View {
 
 struct WalletView_Previews: PreviewProvider {
     static var previews: some View {
-        WalletView().environmentObject(MockModel())
+        WalletView().environmentObject(MockVcxModel())
     }
 }

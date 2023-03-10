@@ -4,7 +4,7 @@ import vcx
 import SwiftUI
 import Alamofire
 
-class MockModel : ObservableObject {
+class MockVcxModel : ObservableObject {
 
     @Published var wallets: [String] = ["Wallet1","Wallet2"]
     @Published var networks: [URL] = []
@@ -35,6 +35,8 @@ class MockModel : ObservableObject {
     @Published var poolOpened = false
     @Published var agencyProvisioned = false
     @Published var agencyClientCreated = false
+    
+    @Published var walletExists = false
     
     func onboardingCompleted() -> Bool {
         return false

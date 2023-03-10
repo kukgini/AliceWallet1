@@ -1,8 +1,7 @@
 import SwiftUI
 
 @main
-struct Alice_WalletApp: App {
-    
+struct AliceWallet1App: App {
     @ObservedObject var model: VcxModel = VcxModel()
     
     var body: some Scene {
@@ -14,4 +13,5 @@ struct Alice_WalletApp: App {
             }
         }
     }
+
 }

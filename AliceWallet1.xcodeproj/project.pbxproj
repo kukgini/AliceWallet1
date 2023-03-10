@@ -3,26 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		913EFE9128279C20007DA561 /* Networks in Resources */ = {isa = PBXBuildFile; fileRef = 913EFE9028279C20007DA561 /* Networks */; };
-		91617FF828D2FE5000A9E500 /* MockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91617FF728D2FE5000A9E500 /* MockModel.swift */; };
-		916219B92744C5350036888C /* VcxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916219B82744C5350036888C /* VcxModel.swift */; };
-		9165FFE32751CC38009C1B82 /* LedgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9165FFE22751CC38009C1B82 /* LedgerView.swift */; };
-		9180659F2824B67300F8A98B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9180659E2824B67300F8A98B /* OnboardingView.swift */; };
-		919230402741F3B800A4D31D /* VcxAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9192303F2741F3B800A4D31D /* VcxAdaptor.swift */; };
-		91BC531828192BFE00F503B4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 91BC531628192BFE00F503B4 /* Model.xcdatamodeld */; };
-		91CF5075273F773700DFFCD7 /* Alice_WalletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CF5074273F773700DFFCD7 /* Alice_WalletApp.swift */; };
-		91CF5077273F773700DFFCD7 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CF5076273F773700DFFCD7 /* WalletView.swift */; };
-		91CF5079273F773800DFFCD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91CF5078273F773800DFFCD7 /* Assets.xcassets */; };
-		91CF507C273F773800DFFCD7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91CF507B273F773800DFFCD7 /* Preview Assets.xcassets */; };
-		91DB9C66274B299C003632E6 /* ConnectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB9C65274B299C003632E6 /* ConnectionsView.swift */; };
-		91DB9C68274B2FF4003632E6 /* AgencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB9C67274B2FF4003632E6 /* AgencyView.swift */; };
-		91DB9C6A274BB11F003632E6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DB9C69274BB11F003632E6 /* ContentView.swift */; };
-		91F70EB427560E760004CC90 /* CredentialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F70EB327560E760004CC90 /* CredentialView.swift */; };
-		A3723DDE47343A1FEFB71884 /* Pods_Alice_Wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A867E94489D67132E7F18F /* Pods_Alice_Wallet.framework */; };
+		917AF7E829BAAADE00A86EBA /* AliceWallet1App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917AF7E729BAAADE00A86EBA /* AliceWallet1App.swift */; };
+		917AF7EA29BAAADE00A86EBA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917AF7E929BAAADE00A86EBA /* ContentView.swift */; };
+		917AF7EC29BAAAE000A86EBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 917AF7EB29BAAAE000A86EBA /* Assets.xcassets */; };
+		917AF7EF29BAAAE000A86EBA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 917AF7EE29BAAAE000A86EBA /* Preview Assets.xcassets */; };
+		917AF7F329BAAC0900A86EBA /* Networks in Resources */ = {isa = PBXBuildFile; fileRef = 913EFE9028279C20007DA561 /* Networks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,14 +19,18 @@
 		27A867E94489D67132E7F18F /* Pods_Alice_Wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alice_Wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C9D1CCD54447902019D492 /* Pods-Alice Wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alice Wallet.release.xcconfig"; path = "Target Support Files/Pods-Alice Wallet/Pods-Alice Wallet.release.xcconfig"; sourceTree = "<group>"; };
 		913EFE9028279C20007DA561 /* Networks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Networks; sourceTree = "<group>"; };
-		91617FF728D2FE5000A9E500 /* MockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModel.swift; sourceTree = "<group>"; };
+		91617FF728D2FE5000A9E500 /* MockVcxModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVcxModel.swift; sourceTree = "<group>"; };
 		916219B82744C5350036888C /* VcxModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VcxModel.swift; sourceTree = "<group>"; };
 		9165FFE22751CC38009C1B82 /* LedgerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LedgerView.swift; sourceTree = "<group>"; };
+		917AF7E529BAAADD00A86EBA /* AliceWallet1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AliceWallet1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		917AF7E729BAAADE00A86EBA /* AliceWallet1App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AliceWallet1App.swift; sourceTree = "<group>"; };
+		917AF7E929BAAADE00A86EBA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		917AF7EB29BAAAE000A86EBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		917AF7EE29BAAAE000A86EBA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9180659E2824B67300F8A98B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		9192303F2741F3B800A4D31D /* VcxAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VcxAdaptor.swift; sourceTree = "<group>"; };
 		91BC531728192BFE00F503B4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		91CF5071273F773700DFFCD7 /* Alice Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Alice Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		91CF5074273F773700DFFCD7 /* Alice_WalletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alice_WalletApp.swift; sourceTree = "<group>"; };
+		91CF5074273F773700DFFCD7 /* AliceWallet1App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AliceWallet1App.swift; sourceTree = "<group>"; };
 		91CF5076273F773700DFFCD7 /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 		91CF5078273F773800DFFCD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		91CF507B273F773800DFFCD7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -48,11 +41,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		91CF506E273F773700DFFCD7 /* Frameworks */ = {
+		917AF7E229BAAADD00A86EBA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3723DDE47343A1FEFB71884 /* Pods_Alice_Wallet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,10 +60,30 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		917AF7E629BAAADE00A86EBA /* AliceWallet1 */ = {
+			isa = PBXGroup;
+			children = (
+				917AF7E729BAAADE00A86EBA /* AliceWallet1App.swift */,
+				917AF7E929BAAADE00A86EBA /* ContentView.swift */,
+				917AF7EB29BAAAE000A86EBA /* Assets.xcassets */,
+				917AF7ED29BAAAE000A86EBA /* Preview Content */,
+			);
+			path = AliceWallet1;
+			sourceTree = "<group>";
+		};
+		917AF7ED29BAAAE000A86EBA /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				917AF7EE29BAAAE000A86EBA /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		91CF5068273F773700DFFCD7 = {
 			isa = PBXGroup;
 			children = (
-				91CF5073273F773700DFFCD7 /* Alice Wallet */,
+				91CF5073273F773700DFFCD7 /* AliceWallet1 */,
+				917AF7E629BAAADE00A86EBA /* AliceWallet1 */,
 				91CF5072273F773700DFFCD7 /* Products */,
 				8B6AB78736950D0726487CC4 /* Pods */,
 				A380F23F14688B4BCC352085 /* Frameworks */,
@@ -81,16 +93,16 @@
 		91CF5072273F773700DFFCD7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				91CF5071273F773700DFFCD7 /* Alice Wallet.app */,
+				917AF7E529BAAADD00A86EBA /* AliceWallet1.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		91CF5073273F773700DFFCD7 /* Alice Wallet */ = {
+		91CF5073273F773700DFFCD7 /* AliceWallet1 */ = {
 			isa = PBXGroup;
 			children = (
 				913EFE9028279C20007DA561 /* Networks */,
-				91CF5074273F773700DFFCD7 /* Alice_WalletApp.swift */,
+				91CF5074273F773700DFFCD7 /* AliceWallet1App.swift */,
 				91CF5076273F773700DFFCD7 /* WalletView.swift */,
 				91CF5078273F773800DFFCD7 /* Assets.xcassets */,
 				91CF507A273F773800DFFCD7 /* Preview Content */,
@@ -103,9 +115,9 @@
 				91F70EB327560E760004CC90 /* CredentialView.swift */,
 				91BC531628192BFE00F503B4 /* Model.xcdatamodeld */,
 				9180659E2824B67300F8A98B /* OnboardingView.swift */,
-				91617FF728D2FE5000A9E500 /* MockModel.swift */,
+				91617FF728D2FE5000A9E500 /* MockVcxModel.swift */,
 			);
-			path = "Alice Wallet";
+			path = AliceWallet1;
 			sourceTree = "<group>";
 		};
 		91CF507A273F773800DFFCD7 /* Preview Content */ = {
@@ -127,23 +139,21 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		91CF5070273F773700DFFCD7 /* Alice Wallet */ = {
+		917AF7E429BAAADD00A86EBA /* AliceWallet1 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 91CF507F273F773800DFFCD7 /* Build configuration list for PBXNativeTarget "Alice Wallet" */;
+			buildConfigurationList = 917AF7F029BAAAE000A86EBA /* Build configuration list for PBXNativeTarget "AliceWallet1" */;
 			buildPhases = (
-				8624276D2CDF3A7F648C8354 /* [CP] Check Pods Manifest.lock */,
-				91CF506D273F773700DFFCD7 /* Sources */,
-				91CF506E273F773700DFFCD7 /* Frameworks */,
-				91CF506F273F773700DFFCD7 /* Resources */,
-				FB1CF7ECD41B5AAA519229C5 /* [CP] Embed Pods Frameworks */,
+				917AF7E129BAAADD00A86EBA /* Sources */,
+				917AF7E229BAAADD00A86EBA /* Frameworks */,
+				917AF7E329BAAADD00A86EBA /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Alice Wallet";
-			productName = "Alice Wallet";
-			productReference = 91CF5071273F773700DFFCD7 /* Alice Wallet.app */;
+			name = AliceWallet1;
+			productName = AliceWallet1;
+			productReference = 917AF7E529BAAADD00A86EBA /* AliceWallet1.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -153,16 +163,16 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1300;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
-					91CF5070273F773700DFFCD7 = {
-						CreatedOnToolsVersion = 13.0;
+					917AF7E429BAAADD00A86EBA = {
+						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
-			buildConfigurationList = 91CF506C273F773700DFFCD7 /* Build configuration list for PBXProject "Alice Wallet" */;
-			compatibilityVersion = "Xcode 13.0";
+			buildConfigurationList = 91CF506C273F773700DFFCD7 /* Build configuration list for PBXProject "AliceWallet1" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -174,89 +184,105 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				91CF5070273F773700DFFCD7 /* Alice Wallet */,
+				917AF7E429BAAADD00A86EBA /* AliceWallet1 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		91CF506F273F773700DFFCD7 /* Resources */ = {
+		917AF7E329BAAADD00A86EBA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				913EFE9128279C20007DA561 /* Networks in Resources */,
-				91CF507C273F773800DFFCD7 /* Preview Assets.xcassets in Resources */,
-				91CF5079273F773800DFFCD7 /* Assets.xcassets in Resources */,
+				917AF7F329BAAC0900A86EBA /* Networks in Resources */,
+				917AF7EF29BAAAE000A86EBA /* Preview Assets.xcassets in Resources */,
+				917AF7EC29BAAAE000A86EBA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		8624276D2CDF3A7F648C8354 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Alice Wallet-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FB1CF7ECD41B5AAA519229C5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Alice Wallet/Pods-Alice Wallet-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Alice Wallet/Pods-Alice Wallet-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Alice Wallet/Pods-Alice Wallet-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		91CF506D273F773700DFFCD7 /* Sources */ = {
+		917AF7E129BAAADD00A86EBA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9180659F2824B67300F8A98B /* OnboardingView.swift in Sources */,
-				91CF5077273F773700DFFCD7 /* WalletView.swift in Sources */,
-				9165FFE32751CC38009C1B82 /* LedgerView.swift in Sources */,
-				91F70EB427560E760004CC90 /* CredentialView.swift in Sources */,
-				91DB9C66274B299C003632E6 /* ConnectionsView.swift in Sources */,
-				91DB9C6A274BB11F003632E6 /* ContentView.swift in Sources */,
-				919230402741F3B800A4D31D /* VcxAdaptor.swift in Sources */,
-				916219B92744C5350036888C /* VcxModel.swift in Sources */,
-				91BC531828192BFE00F503B4 /* Model.xcdatamodeld in Sources */,
-				91617FF828D2FE5000A9E500 /* MockModel.swift in Sources */,
-				91CF5075273F773700DFFCD7 /* Alice_WalletApp.swift in Sources */,
-				91DB9C68274B2FF4003632E6 /* AgencyView.swift in Sources */,
+				917AF7EA29BAAADE00A86EBA /* ContentView.swift in Sources */,
+				917AF7E829BAAADE00A86EBA /* AliceWallet1App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		917AF7F129BAAAE000A86EBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"AliceWallet1/Preview Content\"";
+				DEVELOPMENT_TEAM = UPW8L2KAS5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kukgini.AliceWallet1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		917AF7F229BAAAE000A86EBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"AliceWallet1/Preview Content\"";
+				DEVELOPMENT_TEAM = UPW8L2KAS5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kukgini.AliceWallet1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		91CF507D273F773800DFFCD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -373,99 +399,23 @@
 			};
 			name = Release;
 		};
-		91CF5080273F773800DFFCD7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 04ABF9D6FF92B79401D73B68 /* Pods-Alice Wallet.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Alice Wallet/Preview Content\"";
-				DEVELOPMENT_TEAM = UPW8L2KAS5;
-				ENABLE_BITCODE = NO;
-				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need to scan QR codes";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "my.Alice-Wallet";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		91CF5081273F773800DFFCD7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 85C9D1CCD54447902019D492 /* Pods-Alice Wallet.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Alice Wallet/Preview Content\"";
-				DEVELOPMENT_TEAM = UPW8L2KAS5;
-				ENABLE_BITCODE = NO;
-				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need to scan QR codes";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "my.Alice-Wallet";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		91CF506C273F773700DFFCD7 /* Build configuration list for PBXProject "Alice Wallet" */ = {
+		917AF7F029BAAAE000A86EBA /* Build configuration list for PBXNativeTarget "AliceWallet1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				91CF507D273F773800DFFCD7 /* Debug */,
-				91CF507E273F773800DFFCD7 /* Release */,
+				917AF7F129BAAAE000A86EBA /* Debug */,
+				917AF7F229BAAAE000A86EBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		91CF507F273F773800DFFCD7 /* Build configuration list for PBXNativeTarget "Alice Wallet" */ = {
+		91CF506C273F773700DFFCD7 /* Build configuration list for PBXProject "AliceWallet1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				91CF5080273F773800DFFCD7 /* Debug */,
-				91CF5081273F773800DFFCD7 /* Release */,
+				91CF507D273F773800DFFCD7 /* Debug */,
+				91CF507E273F773800DFFCD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
